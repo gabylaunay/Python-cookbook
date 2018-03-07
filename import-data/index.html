@@ -6,7 +6,7 @@
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="generator" content="Hugo 0.37" />
-<title>import-data :: Python Cookbook for Scientific Data Analysis</title>
+<title>Importing Data :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
 <link href="/Python-cookbook/css/nucleus.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 <script type="text/javascript">
       var baseurl = "https:\/\/gabylaunay.github.io\/Python-cookbook\/";
 </script>
-<meta name="description" content="">
+<meta name="description" content="Cookbook on importing data into Python">
 
 
     
@@ -46,19 +46,13 @@
     <li data-nav-id="/Python-cookbook/image-analysis/" class="dd-item
         ">
       <div>
-      <a href="/Python-cookbook/image-analysis/">image-analysis</a>
+      <a href="/Python-cookbook/image-analysis/">Image Analysis</a>
       </div>
     </li>
     <li data-nav-id="/Python-cookbook/import-data/" class="dd-item parent active
         ">
       <div>
-      <a href="/Python-cookbook/import-data/">import-data</a>
-      </div>
-    </li>
-    <li data-nav-id="/Python-cookbook/plotting/" class="dd-item
-        ">
-      <div>
-      <a href="/Python-cookbook/plotting/">plotting</a>
+      <a href="/Python-cookbook/import-data/">Importing Data</a>
       </div>
     </li>
 
@@ -76,12 +70,10 @@
         <select onchange="javascript:location.href = this.value;">
           
     <option value="/Python-cookbook/image-analysis/" >
-   image-analysis</option>
+   Image Analysis</option>
     <option value="/Python-cookbook/import-data/"  selected>
-   import-data</option> 
+   Importing Data</option> 
   
-    <option value="/Python-cookbook/plotting/" >
-   plotting</option>
 
 
 
@@ -104,11 +96,18 @@
       </div>
     
 
-    <h1>import-data</h1>
+    <h1>Importing Data</h1>
     
     
     
 
+
+
+<div class="panel panel-success">
+	<div class="panel-heading">Get the script !</div>
+	<div class="panel-body"><a href="files/script.py">script.py</a></div>
+	
+</div>
 
 
 <h1 id="ascii-files">Ascii files</h1>
@@ -117,7 +116,7 @@
 
 <p>Simplest way to import data aranged in table from an ascii file is to use numpy:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">numpy</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">np</span>
-data <span style="color:#666">=</span> np<span style="color:#666">.</span>genfromtxt(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data.csv&#39;</span>)
+data <span style="color:#666">=</span> np<span style="color:#666">.</span>genfromtxt(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/data.csv&#39;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(data)</code></pre></div>
 <pre><code>[[37.70587485 25.87930691 11.1807849   6.29982498]
  [ 8.56702615  6.42440682 26.43331203  4.75911353]
@@ -136,12 +135,12 @@ data <span style="color:#666">=</span> np<span style="color:#666">.</span>genfro
 
 <p>Exporting arrays of numbers is as simple</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">new_data <span style="color:#666">=</span> data<span style="color:#666">*</span><span style="color:#40a070">4.3</span>
-np<span style="color:#666">.</span>savetxt(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;new_data.csv&#39;</span>, new_data)</code></pre></div>
+np<span style="color:#666">.</span>savetxt(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/new_data.csv&#39;</span>, new_data)</code></pre></div>
 <h2 id="mixed-table-of-numbers-and-text">Mixed table of numbers and text</h2>
 
 <p>The <a href="https://pandas.pydata.org/">pandas</a> package allows to deal with complex sets of data including text and numbers.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pandas</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">pd</span>
-data <span style="color:#666">=</span> pd<span style="color:#666">.</span>read_csv(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data_mixed.csv&#39;</span>)
+data <span style="color:#666">=</span> pd<span style="color:#666">.</span>read_csv(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/data_mixed.csv&#39;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(data)</code></pre></div>
 <pre><code>  yellow   125   [0.18848372 0.54320351 0.1604927 ]
 0   blue    24   [0.33882547 0.87313498 0.46219675]
@@ -152,7 +151,7 @@ data <span style="color:#666">=</span> pd<span style="color:#666">.</span>read_c
 <h2 id="complex-data">Complex data</h2>
 
 <p>Data than are not organized in a table (like text, result measurements from an exotic machine) can be imported using the builtins python functions.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">with</span> <span style="color:#007020">open</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data_complex.txt&#39;</span>, <span style="color:#4070a0"></span><span style="color:#4070a0">&#39;r&#39;</span>) <span style="color:#007020;font-weight:bold">as</span> f:
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">with</span> <span style="color:#007020">open</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/data_complex.txt&#39;</span>, <span style="color:#4070a0"></span><span style="color:#4070a0">&#39;r&#39;</span>) <span style="color:#007020;font-weight:bold">as</span> f:
     data <span style="color:#666">=</span> f<span style="color:#666">.</span>readlines()
 <span style="color:#007020;font-weight:bold">for</span> line <span style="color:#007020;font-weight:bold">in</span> data:
     <span style="color:#007020;font-weight:bold">print</span>(line)</code></pre></div>
@@ -177,7 +176,7 @@ enable clear programming on both small and large scales.[27]
 
 <p>The <a href="https://www.scipy.org">scipy</a> package makes it particularly easy to import on work with images.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">scipy</span> <span style="color:#007020;font-weight:bold">import</span> misc
-image <span style="color:#666">=</span> misc<span style="color:#666">.</span>imread(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;image.bmp&#39;</span>)</code></pre></div>
+image <span style="color:#666">=</span> misc<span style="color:#666">.</span>imread(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/image.bmp&#39;</span>)</code></pre></div>
 <pre><code>/usr/lib/python3.6/site-packages/ipykernel_launcher.py:2: DeprecationWarning: `imread` is deprecated!
 `imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
 Use ``imageio.imread`` instead.
@@ -210,8 +209,8 @@ Value of the pixel at (10,10): 189
     
         <div class="chevrons">
     <div id="navigation">
-<a class="nav nav-prev" href="/Python-cookbook/image-analysis/" title="image-analysis"> <i class="fa fa-chevron-left"></i><label>image-analysis</label></a>
-    <a class="nav nav-next" href="/Python-cookbook/plotting/" title="plotting" style="margin-right: 0px;"><label>plotting</label><i class="fa fa-chevron-right"></i></a></div>
+<a class="nav nav-prev" href="/Python-cookbook/image-analysis/" title="Image Analysis"> <i class="fa fa-chevron-left"></i><label>Image Analysis</label></a>
+    <a class="nav nav-next" href="/Python-cookbook/image-analysis/" title="Image Analysis" style="margin-right: 0px;"><label>Image Analysis</label><i class="fa fa-chevron-right"></i></a></div>
   </div>
 
   </section>
@@ -237,8 +236,7 @@ Value of the pixel at (10,10): 189
 
 
   
-    <p>footer</p>
-
+    Create a content/_footer.md file to customize the footer content
   
 
 
