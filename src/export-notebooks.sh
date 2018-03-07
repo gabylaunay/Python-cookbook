@@ -4,8 +4,9 @@ notebook_dir="$(pwd)/notebooks"
 content_dir="$(pwd)/content"
 
 # Clean old generated jupyter notebooks
-for file in "$content_dir"; do
-    [ -d $file ] && rm -rf $file
+echo "=== Cleaning ==="
+for file in "$content_dir/*"; do
+    [[ -d $file ]] && rm -rf $file
 done
 
 # Generate new pages from jupyter notebooks
