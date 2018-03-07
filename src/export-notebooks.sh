@@ -9,9 +9,14 @@ for file in *.ipynb; do
     echo "=== Exporting $basename ==="
     # exporting to markdown
     jupyter nbconvert --to markdown "$file"
+    # Get page name from metadata
+    page_name=$(jq -r ".metadata.hugo_page_name" "$basename.ipynb")
+    if [[ $page_name = 'null' ]] ; then
+        page_name=$basename
+    fi
     # adding hugo header
     sed -i "1i+++" "${basename}.md"
-    sed -i "1ititle = \"$basename\"" "${basename}.md"
+    sed -i "1ititle = \"$page_name\"" "${basename}.md"
     sed -i "1iweight = 1" "${basename}.md"
     sed -i "1i+++" "${basename}.md"
     # Move to content folder
