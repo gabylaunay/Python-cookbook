@@ -38,7 +38,7 @@ plt.imshow(edges)
 plt.show()
 
 
-edges[180:] = 0
+edges[180:, :] = 0
 # Display the obtained edges
 plt.figure()
 plt.imshow(edges)
@@ -61,6 +61,48 @@ ys -= ys.min()
 # Plot the edges
 plt.figure()
 plt.plot(xs, ys, marker='o', ls='none')
+plt.axhline(0, color='k')
 plt.axis('equal')
 plt.show()
+
+
+res = 120 
+xs /= res
+ys /= res
+# Plot the edges
+plt.figure()
+plt.plot(xs, ys, marker='o', ls='none')
+plt.axhline(0, color='k')
+plt.axis('equal')
+plt.xlabel('x [mm]')
+plt.ylabel('y [mm]')
+plt.show()
+
+
+# Ensure increasing x values
+new_xs = np.sort(list(set(xs)))
+new_ys = []
+for x in new_xs:
+    new_ys.append(np.mean(ys[xs == x]))
+xs = new_xs
+ys = new_ys
+# Find a fit
+import scipy.interpolate as spint
+edge_f = spint.UnivariateSpline(xs, ys, k=5, s=0.001)
+# Display the fit
+plt.figure()
+plt.plot(xs, ys, marker='o', ls='none')
+plt.plot(xs, edge_f(xs))
+plt.axhline(0, color='k')
+plt.xlabel('x [mm]')
+plt.ylabel('y [mm]')
+plt.axis('equal')
+plt.show()
+
+
+base_radius = np.max(xs) - np.min(xs)
+height = np.max(ys)
+# Print
+print("Base radius: {} mm".format(base_radius))
+print("Drop height: {} mm".format(height))
 
