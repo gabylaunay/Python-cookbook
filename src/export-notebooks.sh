@@ -25,16 +25,17 @@ for file in *.ipynb; do
     fi
     # Exporting to markdown
     jupyter nbconvert --to markdown "$file"
-    sed -i "1i{{% notice tip %}}" "${basename}.md"
-    sed -i "2iYou can get the python script detailled in this page here: [script.py](files/script.py)." "${basename}.md"
-    sed -i "3i "
-    sed -i "4iAnd an archive containing the script and the data here: [archive.tar.gz](files/archive.tar.gz), [archive.zip](files/archive.zip)." "${basename}.md"
-    sed -i "5i{{% /notice %}}" "${basename}.md"
+    #     Addind header
     sed -i "1i+++" "${basename}.md"
-    sed -i "1ititle = \"$page_name\"" "${basename}.md"
-    sed -i "1iweight = 1" "${basename}.md"
-    sed -i "1idescription = \"$page_description\"" "${basename}.md"
-    sed -i "1i+++" "${basename}.md"
+    sed -i "2ititle = \"$page_name\"" "${basename}.md"
+    sed -i "3iweight = 1" "${basename}.md"
+    sed -i "4idescription = \"$page_description\"" "${basename}.md"
+    sed -i "5i+++" "${basename}.md"
+    sed -i "6i{{% notice tip %}}" "${basename}.md"
+    sed -i "7iYou can get the python script detailled in this page here: [script.py](files/script.py)." "${basename}.md"
+    sed -i "8i "
+    sed -i "9iAnd an archive containing the script and the data here: [archive.tar.gz](files/archive.tar.gz), [archive.zip](files/archive.zip)." "${basename}.md"
+    sed -i "10i{{% /notice %}}" "${basename}.md"
     # Exporting to python script
     jupyter nbconvert --to python "$file" --template=strip_markdown.tpl
     sed -i '/^# In\[.*$/{N;N;d}' "${basename}.py"

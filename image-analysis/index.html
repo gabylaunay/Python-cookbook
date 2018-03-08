@@ -111,13 +111,32 @@
 
 <h1 id="importing-images">Importing images</h1>
 
-<p>Importing images is made easy by the <a href="https://www.scipy.org/">scipy</a> package:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">scipy</span> <span style="color:#007020;font-weight:bold">import</span> misc
-image <span style="color:#666">=</span> misc<span style="color:#666">.</span>imread(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/image.bmp&#39;</span>)</code></pre></div>
-<pre><code>/usr/lib/python3.6/site-packages/ipykernel_launcher.py:2: DeprecationWarning: `imread` is deprecated!
-`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
-Use ``imageio.imread`` instead.
-</code></pre>
+<p>The <a href="https://www.scipy.org/">Scipy</a> package once provided a function to import image into python.
+It now recomends to use the <a href="http://imageio.readthedocs.io/en/latest/index.html">imageio</a> package that supports plenty of file format (see <a href="http://imageio.readthedocs.io/en/latest/formats.html">here</a> for a list).</p>
+
+<p>Imageio can also import video or grab images directly from a camera.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">imageio</span>
+image <span style="color:#666">=</span> imageio<span style="color:#666">.</span>imread(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/image.bmp&#39;</span>)</code></pre></div>
+<div class="expand">
+  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+    <font color="grey">
+      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+      <span>
+        
+        
+        Explain me this block
+        
+      </span>
+    </font>
+  </div>
+  <div class="expand-content" style="display: none;text-indent:0px">
+    <font color="grey">
+      <p>First line import the Imageio module.
+Second line read the image and store it in the <code>image</code> variable.</p>
+
+    </font>
+  </div>
+</div>
 
 <p>Images area stored as arrays of numbers.
 You can display them for verification using the <a href="https://matplotlib.org/">matplotlib</a> package:</p>
@@ -126,7 +145,7 @@ plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>imshow(image)
 plt<span style="color:#666">.</span>colorbar()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="image-analysis_files/image-analysis_3_0.png" alt="png" /></p>
+<p><img src="image-analysis_files/image-analysis_4_0.png" alt="png" /></p>
 
 <h1 id="cropping">Cropping</h1>
 
@@ -136,7 +155,7 @@ plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>imshow(image)
 plt<span style="color:#666">.</span>show()
               </code></pre></div>
-<p><img src="image-analysis_files/image-analysis_5_0.png" alt="png" /></p>
+<p><img src="image-analysis_files/image-analysis_6_0.png" alt="png" /></p>
 
 <h1 id="edge-detection">Edge detection</h1>
 
@@ -155,7 +174,7 @@ edges <span style="color:#666">=</span> cv2<span style="color:#666">.</span>Cann
 plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>imshow(edges)
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="image-analysis_files/image-analysis_7_0.png" alt="png" /></p>
+<p><img src="image-analysis_files/image-analysis_8_0.png" alt="png" /></p>
 
 <p>As we can see here, the edge detection succesfully detect the drop edges, but also some structures near the sample surfaces.
 Lets improve the threshold values to get rid of those unwated bits.</p>
@@ -166,7 +185,7 @@ edges <span style="color:#666">=</span> cv2<span style="color:#666">.</span>Cann
 plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>imshow(edges)
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="image-analysis_files/image-analysis_9_0.png" alt="png" /></p>
+<p><img src="image-analysis_files/image-analysis_10_0.png" alt="png" /></p>
 
 <p>We than need to remove the edges of the drop reflection on the sample.
 We can do this by removing all the edges present below the baseline.</p>
@@ -175,7 +194,7 @@ We can do this by removing all the edges present below the baseline.</p>
 plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>imshow(edges)
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="image-analysis_files/image-analysis_11_0.png" alt="png" /></p>
+<p><img src="image-analysis_files/image-analysis_12_0.png" alt="png" /></p>
 
 <h1 id="fitting-edges">Fitting edges</h1>
 
@@ -190,7 +209,7 @@ plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
 plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="image-analysis_files/image-analysis_13_0.png" alt="png" /></p>
+<p><img src="image-analysis_files/image-analysis_14_0.png" alt="png" /></p>
 
 <p>For convenience, we may want to center the drop edge on the referential</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xs <span style="color:#666">-=</span> xs<span style="color:#666">.</span>mean()
@@ -200,7 +219,7 @@ plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
 plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="image-analysis_files/image-analysis_15_0.png" alt="png" /></p>
+<p><img src="image-analysis_files/image-analysis_16_0.png" alt="png" /></p>
 
 
 

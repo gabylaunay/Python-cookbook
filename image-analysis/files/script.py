@@ -1,8 +1,8 @@
 #!/bin/env python3
 # coding: utf-8
 
-from scipy import misc
-image = misc.imread('data/image.bmp')
+import imageio
+image = imageio.imread('data/image.bmp')
 
 
 import matplotlib.pyplot as plt

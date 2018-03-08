@@ -1,16 +1,20 @@
 <div class="expand">
-    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-        <span>
+  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+    <font color="grey">
+      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+      <span>
         {{$expandMessage := T "Expand-title"}}
         {{ if .IsNamedParams }}
         {{.Get "default" | default $expandMessage}}
         {{else}}
         {{.Get 0 | default $expandMessage}}
         {{end}}
-        </span>
-    </div>
-    <div class="expand-content" style="display: none;">
-{{.Inner | safeHTML}}
-    </div>
+      </span>
+    </font>
+  </div>
+  <div class="expand-content" style="display: none;text-indent:0px">
+    <font color="grey">
+      {{.Inner | safeHTML}}
+    </font>
+  </div>
 </div>
