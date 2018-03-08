@@ -6,6 +6,6 @@ title = "Python CookBook"
 
 This website provides a collection of Python scripts, snippets and tutorials
 for scientific data analysis.
-The currently available ressource are listed below:
+The currently available ressources are listed below:
 
 {{% children style="card" depth="2"  description="true" %}}
