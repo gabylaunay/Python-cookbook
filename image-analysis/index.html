@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="generator" content="Hugo 0.37" />
+<meta name="generator" content="Hugo 0.37.1" />
 <title>Drop Shape analysis using Python :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
@@ -55,6 +55,18 @@
       <a href="/Python-cookbook/import-data/">Importing Data</a>
       </div>
     </li>
+    <li data-nav-id="/Python-cookbook/pydsa/" class="dd-item
+        ">
+      <div>
+      <a href="/Python-cookbook/pydsa/">pyDSA</a>
+      </div>
+    </li>
+    <li data-nav-id="/Python-cookbook/pydsa_video/" class="dd-item
+        ">
+      <div>
+      <a href="/Python-cookbook/pydsa_video/"></a>
+      </div>
+    </li>
 
 
 
@@ -74,6 +86,10 @@
   
     <option value="/Python-cookbook/import-data/" >
    Importing Data</option>
+    <option value="/Python-cookbook/pydsa/" >
+   pyDSA</option>
+    <option value="/Python-cookbook/pydsa_video/" >
+   </option>
 
 
 
@@ -109,7 +125,7 @@
 </div>
 
 
-<p>This tutorial proposes a way of analysing the image of a drop on a SLIPS surface.
+<p>This tutorial proposes a way of analyzing the image of a drop on a SLIPS surface.
 At the end of it, we will have gathered the important characteristics of the drop:</p>
 
 <ul>
@@ -269,8 +285,8 @@ We then display the detected edges.</p>
 
 <p>The <code>Canny()</code> function returns an array of number that is equal to 1 (in yellow here) where edges have been detected.</p>
 
-<p>As we can see here, OpenCV succesfully detects the drop edges, but also some structures near the sample surface.
-Lets improve the threshold values to get rid of those unwated bits.</p>
+<p>As we can see here, OpenCV successfully detects the drop edges, but also some structures near the sample surface.
+Lets improve the threshold values to get rid of those unwanted bits.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">thres1 <span style="color:#666">=</span> image<span style="color:#666">.</span><span style="color:#007020">min</span>()<span style="color:#666">*</span><span style="color:#40a070">0.75</span>
 thres2 <span style="color:#666">=</span> image<span style="color:#666">.</span><span style="color:#007020">max</span>()<span style="color:#666">*</span><span style="color:#40a070">1.5</span>
 edges <span style="color:#666">=</span> cv2<span style="color:#666">.</span>Canny(image, thres1, thres2)
@@ -303,7 +319,7 @@ The thresholds values are now 0.75 times the minimal pixel value and 1.5 times t
 </div>
 
 <p>We get rid of some of the unwanted bits, but we still detect some edge due to the reflection of the drop on the sample.
-We can remove them by deletig all the edges present below the baseline, that is here toughly around y=180.</p>
+We can remove them by deleting all the edges present below the baseline, that is here toughly around y=180.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">edges[<span style="color:#40a070">180</span>:, :] <span style="color:#666">=</span> <span style="color:#40a070">0</span>
 <span style="color:#60a0b0;font-style:italic"># Display the obtained edges</span>
 plt<span style="color:#666">.</span>figure()
@@ -462,7 +478,7 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <h2 id="getting-the-drop-basic-properties">Getting the drop basic properties</h2>
 
 <p>We can know extract some information from our data.
-It is quite srtaightforward to get the drop base radius and height:</p>
+It is quite straightforward to get the drop base radius and height:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">base_radius <span style="color:#666">=</span> np<span style="color:#666">.</span><span style="color:#007020">max</span>(xs) <span style="color:#666">-</span> np<span style="color:#666">.</span><span style="color:#007020">min</span>(xs)
 height <span style="color:#666">=</span> np<span style="color:#666">.</span><span style="color:#007020">max</span>(ys)
 <span style="color:#60a0b0;font-style:italic"># Print</span>
