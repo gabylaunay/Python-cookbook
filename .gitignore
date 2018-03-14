@@ -1,3 +1,6 @@
 src/content/image-analysis
 src/content/import-data
 src/content/plotting
+src/content/pyDSA
+src/content/pyDSA_video
+src/notebooks/.ipynb_checkpoints
