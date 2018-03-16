@@ -13,6 +13,7 @@ done
 cd $notebook_dir
 for file in *.ipynb; do
     basename=${file%.*}
+    echo " "
     echo "=== Exporting $basename ==="
     # Get page metadata
     page_name=$(jq -r ".metadata.hugo_page_name" "$basename.ipynb")
@@ -23,12 +24,16 @@ for file in *.ipynb; do
     if [[ $page_description = 'null' ]] ; then
         page_description=""
     fi
+    page_weight=$(jq -r ".metadata.hugo_weight" "$basename.ipynb")
+    if [[ $page_weight = 'null' ]] ; then
+        page_weight="0"
+    fi
     # Exporting to markdown
     jupyter nbconvert --to markdown "$file"
     #     Addind header
     sed -i "1i+++" "${basename}.md"
     sed -i "2ititle = \"$page_name\"" "${basename}.md"
-    sed -i "3iweight = 1" "${basename}.md"
+    sed -i "3iweight = $page_weight" "${basename}.md"
     sed -i "4idescription = \"$page_description\"" "${basename}.md"
     sed -i "5i+++" "${basename}.md"
     sed -i "6i{{% notice tip %}}" "${basename}.md"
@@ -43,7 +48,7 @@ for file in *.ipynb; do
     sed -i "1i#!/bin/env python3" "${basename}.py"
     mv -f "${basename}.py" "script.py"
     # Make archives
-    tar -cf "archive.tar.gz" "script.py" "data"
+    tar -czf "archive.tar.gz" "script.py" "data"
     zip "archive.zip" "script.py" "data"
     # Move to content folder
     mkdir -p "$content_dir/$basename"
