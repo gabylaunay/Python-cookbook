@@ -1,0 +1,13 @@
+baseURL = "https://gabylaunay.github.io/Python-cookbook/"
+languageCode = "en-us"
+title = "Python Cookbook for Scientific Data Analysis"
+PygmentsCodeFences = true
+# PygmentsStyle = "emacs"
+# PygmentsStyle = "manni"
+# PygmentsStyle = "perldoc"
+PygmentsStyle = "friendly"
+theme = "docdock"
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+[params]
+themeStyle = "flex"
