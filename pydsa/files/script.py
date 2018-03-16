@@ -37,7 +37,7 @@ edge.display()
 plt.show()
 
 
-edge.fit()
+edge.fit(s=0.0005)
 
 # Display the edge
 plt.figure()
@@ -54,6 +54,8 @@ plt.show()
 
 
 edge.compute_contact_angle()
+print('Contact angles: {}'.format(edge.thetas))
+print('Triple point angles: {}'.format(edge.thetas_triple))
 
 # Display the edge
 plt.figure()
@@ -68,7 +70,7 @@ im = dsa.import_from_image('data/image.bmp', dx=1/120, dy=1/120, unit_x='mm', un
 im.crop(intervx=[1.5, 5], intervy=[1, 3], inplace=True)
 im.set_baseline([2, 1.61], [4.5, 1.61])
 edge = im.edge_detection()
-edge.fit()
+edge.fit(s=0.0005)
 edge.detect_triple_points()
 edge.compute_contact_angle()
 
