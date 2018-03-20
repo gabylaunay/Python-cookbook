@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # Import an image
 im = dsa.import_from_image('data/image.bmp', dx=1/120, dy=1/120, unit_x='mm', unit_y='mm')
 
-# Display
+# Display it
 plt.figure()
 im.display()
 plt.show()
@@ -21,9 +21,9 @@ im.display()
 plt.show()
 
 
-im.set_baseline([2, 1.61], [4.5, 1.61])
+im.set_baseline(pt1=[2, 1.61], pt2=[4.5, 1.61])
 
-# Display
+# DisplayF
 plt.figure()
 im.display()
 plt.show()
@@ -58,8 +58,17 @@ print('Contact angles: {}'.format(edge.thetas))
 print('Triple point angles: {}'.format(edge.thetas_triple))
 
 # Display the edge
-plt.figure()
+fig, axs = plt.subplots(1, 2, figsize=(10, 4))
+plt.sca(axs[0])
 edge.display()
+plt.axis('equal')
+plt.ylim(1.5, 3)
+# Zoom
+plt.sca(axs[1])
+edge.display()
+plt.axis('equal')
+plt.ylim(1.5, 2)
+plt.xlim(2, 2.3)
 plt.show()
 
 
@@ -79,5 +88,4 @@ plt.figure(figsize=(20, 8))
 edge.display()
 im.display()
 plt.show()
-
 

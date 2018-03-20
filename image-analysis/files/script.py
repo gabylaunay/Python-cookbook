@@ -26,7 +26,7 @@ thres1 = image.min()
 thres2 = image.max()
 edges = cv2.Canny(image, thres1, thres2)
 
-# Display the obtained edges
+# Display the edges
 plt.figure()
 plt.imshow(edges)
 plt.show()
@@ -36,7 +36,7 @@ thres1 = image.min()*0.75
 thres2 = image.max()*1.5
 edges = cv2.Canny(image, thres1, thres2)
 
-# Display the obtained edges
+# Display the edges
 plt.figure()
 plt.imshow(edges)
 plt.show()
@@ -44,7 +44,7 @@ plt.show()
 
 edges[180:, :] = 0
 
-# Display the obtained edges
+# Display the edges
 plt.figure()
 plt.imshow(edges)
 plt.show()
@@ -55,15 +55,15 @@ ys, xs = np.where(edges)
 ys = np.asarray(-ys, dtype=float)
 xs = np.asarray(xs, dtype=float)
 
-# Plot the edges
+# Display the edges
 plt.figure()
 plt.plot(xs, ys, marker='o', ls='none')
 plt.axis('equal')
 plt.show()
 
 
-xs -= xs.mean()
-ys -= ys.min()
+xs = xs - xs.mean()
+ys = ys - ys.min()
 
 # Plot the edges
 plt.figure()
@@ -77,13 +77,23 @@ res = 120
 xs /= res
 ys /= res
 
-# Plot the edges
-plt.figure()
+# Plot the edge
+fig, axs = plt.subplots(1, 2, figsize=(10, 4))
+plt.sca(axs[0])
 plt.plot(xs, ys, marker='o', ls='none')
 plt.axhline(0, color='k')
 plt.axis('equal')
 plt.xlabel('x [mm]')
 plt.ylabel('y [mm]')
+# Plot a zoom on the edge
+plt.sca(axs[1])
+plt.plot(xs, ys, marker='o', ls='none')
+plt.axhline(0, color='k')
+plt.axis('equal')
+plt.xlabel('x [mm]')
+plt.xlim(-1.15, -0.9)
+plt.ylim(-0.05, 0.3)
+plt.title("Zoom")
 plt.show()
 
 
@@ -93,30 +103,43 @@ new_ys = []
 for x in new_xs:
     new_ys.append(np.mean(ys[xs == x]))
 xs = new_xs
-ys = new_ys
-# Find a fit
+ys = np.asarray(new_ys)
+
+# Fitting the drop edge
 import scipy.interpolate as spint
 edge_f = spint.UnivariateSpline(xs, ys, k=5, s=0.005)
 
 # Display the fit
-plt.figure()
+fig, axs = plt.subplots(1, 2, figsize=(10, 4))
+plt.sca(axs[0])
 plt.plot(xs, ys, marker='o', ls='none')
 plt.plot(xs, edge_f(xs))
 plt.axhline(0, color='k')
 plt.xlabel('x [mm]')
 plt.ylabel('y [mm]')
 plt.axis('equal')
+# Plot a zoom on the edge
+plt.sca(axs[1])
+plt.plot(xs, ys, marker='o', ls='none')
+plt.plot(xs, edge_f(xs))
+plt.axhline(0, color='k')
+plt.axis('equal')
+plt.xlabel('x [mm]')
+plt.xlim(-1.1, -0.7)
+plt.ylim(0, 0.5)
+plt.title("Zoom")
 plt.show()
 
 
-base_radius = np.max(xs) - np.min(xs)
-height = np.max(ys)
+base_radius = xs.max() - xs.min()
+height = ys.max()
 
 # Print
-print("Base radius: {} mm".format(base_radius))
+print("Drop base: {} mm".format(base_radius))
 print("Drop height: {} mm".format(height))
 
 
+# Get left and right contact points
 left_x = np.min(xs)
 right_x = np.max(xs)
 dx = (right_x - left_x)/100
@@ -134,7 +157,7 @@ theta_right = np.pi + np.arctan(deriv)
 print(theta_left/np.pi*180)
 print(theta_right/np.pi*180)
 
-# Display the fit
+# Display the fit and the angles
 plt.figure()
 plt.plot(xs, ys, marker='o', ls='none')
 plt.plot(xs, edge_f(xs))

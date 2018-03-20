@@ -67,6 +67,12 @@
       <a href="/Python-cookbook/import-data/">Importing Data</a>
       </div>
     </li>
+    <li data-nav-id="/Python-cookbook/publication_quality_plots/" class="dd-item
+        ">
+      <div>
+      <a href="/Python-cookbook/publication_quality_plots/">Publication-quality plots</a>
+      </div>
+    </li>
 
 
 
@@ -90,6 +96,8 @@
   
     <option value="/Python-cookbook/import-data/" >
    Importing Data</option>
+    <option value="/Python-cookbook/publication_quality_plots/" >
+   Publication-quality plots</option>
 
 
 
@@ -119,26 +127,38 @@
 
 
 
-<p><div class="notices tip" ><p>You can get the python script detailled in this page here: <a href="files/script.py">script.py</a>.</p>
+<div class="notices tip" ><p>You can get the python script detailled in this page here: <a href="files/script.py">script.py</a>.</p>
 
 <p>And an archive containing the script and the data here: <a href="files/archive.tar.gz">archive.tar.gz</a>, <a href="files/archive.zip">archive.zip</a>.</p>
 </div>
 
-It is recommended to read the tutorial on using pyDSA on a single image before doing this tutorial.</p>
+
+<div class="alert 
+	alert-warning"
+ 
+role="alert">It is recommended to read the tutorial on <a href="../pydsa/index.html">using pyDSA on a single image</a> before doing this tutorial.</div>
+
+
+<p>This tutorial presents how to use pyDSA to analyze videos of drops.
+The video used is a side-view of a drop during an inflation-deflation sequence.</p>
 
 <h2 id="importing-a-video">Importing a video</h2>
 
-<p>Importing works in the same way than for an image.
-Importing images in Python can easily fill your memory, you can import only some images of the video by using the <code>incr</code> argument.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pyDSA</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">dsa</span>
+<p>Importing works in the same way than for an image.</p>
+
+<div class="alert 
+	alert-warning"
+ 
+role="alert">Importing images in Python can easily fill your memory, you can import only some images of the video by using the <code>incr</code> argument.</div>
+
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pyDSA</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">dsa</span>   
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">matplotlib.pyplot</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">plt</span>
 
 <span style="color:#60a0b0;font-style:italic"># Import an image</span>
 ims <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_from_video(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/video.mp4&#39;</span>,
                             dx<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, dy<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, dt<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">10</span>,
                             unit_x<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_y<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_t<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;s&#39;</span>,
-                            incr<span style="color:#666">=</span><span style="color:#40a070">1</span>)
-
+                            incr<span style="color:#666">=</span><span style="color:#40a070">10</span>)
 <span style="color:#60a0b0;font-style:italic"># Display</span>
 ims<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
@@ -146,11 +166,11 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 
 <h2 id="detecting-the-edges-and-contact-angles">Detecting the edges and contact angles</h2>
 
-<p>The method is similar than for a single image: setting the baseline, detecting the edges, fitting the edges, and computing the contact angles.</p>
+<p>The method is similar than for a single image: we set the baseline, detect the edges, fit the edges, and compute the contact angles.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ims<span style="color:#666">.</span>set_baseline([<span style="color:#40a070">0.0</span>, <span style="color:#40a070">0.583</span>],
                  [<span style="color:#40a070">6.492</span>, <span style="color:#40a070">0.57</span>])
 edges <span style="color:#666">=</span> ims<span style="color:#666">.</span>edge_detection()
-edges<span style="color:#666">.</span>fit()
+edges<span style="color:#666">.</span>fit(s<span style="color:#666">=</span><span style="color:#40a070">0.01</span>)
 edges<span style="color:#666">.</span>compute_contact_angle()
 
 <span style="color:#60a0b0;font-style:italic"># Display</span>
@@ -170,14 +190,25 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 
 <h2 id="plotting-the-drop-properties-evolution">Plotting the drop properties evolution</h2>
 
-<p>You can then display a summary of the drop properties evolution.</p>
+<p>We can then display a summary of the drop properties evolution.
+The following function will display:
+- the evolution of the drop edge contact with the surface (blue and yellow in the first figure)
+- the evolution of the drop base length (green in the first figure)
+- the evolution of the contact angles (blue and yellow in the second figure)</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">edges<span style="color:#666">.</span>display_summary(figsize<span style="color:#666">=</span>(<span style="color:#40a070">10</span>, <span style="color:#40a070">8</span>))
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="pydsa_video_files/pydsa_video_5_0.png" alt="png" /></p>
 
 <h2 id="accessing-the-drop-properties">Accessing the drop properties</h2>
 
-<p>Angles are defined in the trigonometric sens, from the horizontal.</p>
+<p>We can also extract the numeric values of those properties,
+if we want to do further processing on them.</p>
+
+<div class="alert 
+	alert-info"
+ 
+role="alert">Angles are defined in the trigonometric sens, from the horizontal line.</div>
+
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">thetas, thetas_t <span style="color:#666">=</span> edges<span style="color:#666">.</span>get_contact_angles()
 <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;=== Left contact angle: ===&#34;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(thetas[:, <span style="color:#40a070">0</span>])
@@ -185,66 +216,66 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <span style="color:#007020;font-weight:bold">print</span>(thetas[:, <span style="color:#40a070">1</span>])
 
 radius <span style="color:#666">=</span> edges<span style="color:#666">.</span>get_drop_base()
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">=== Drop base: ===&#34;</span>)
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">=== Drop contact positions: ===&#34;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(radius)</code></pre></div>
 <pre><code>=== Left contact angle: ===
-[107.23888862 107.37400597 107.05007046 106.86408573 107.09403969
- 106.87152793 106.89288488 107.58136308 106.87594673 107.19126851
- 106.7112947  105.7573553  108.49189273 107.93621437 108.02598317
- 106.22630943 105.39799791 107.07903966 107.56878519 106.39527947
- 105.81315002 106.46467088 106.25154551 106.26044864 106.23025799
- 106.62498501 105.91004866 105.93039563 105.74143665 107.00158745
- 106.8341172  105.38875097 104.60591926 103.55222994 103.38568201
- 103.69710654 104.54526798 104.28718362]
+[106.82124177 106.89153104 106.80195249 107.28297574 107.34363505
+ 107.27784188 106.95177242 107.53012718 107.16280456 107.25262441
+ 106.38800189 107.13128785 106.37357963 105.5870764  107.08325183
+ 106.39480128 106.66051429 106.58224643 106.58062816 107.08964047
+ 106.82985203 106.83611945 107.08110645 106.82104733 106.98000331
+ 107.32906465 106.79129417 106.34451226 105.77145275 106.69374328
+ 104.02426232 105.5866148  104.74019582 103.04931016 102.88969475
+ 102.69842583 103.88329765 103.66657388]
 
 === Right contact angle: ===
-[69.81007431 70.06452567 69.94918814 70.46867058 69.86748429 69.78341881
- 70.00252248 69.35932262 68.97432279 69.70237737 71.18163723 72.69288788
- 73.16778647 70.7287935  71.19678366 71.79424    72.74553129 72.31503295
- 71.58481928 71.18967459 71.6835157  71.24023387 71.86786301 71.76356703
- 72.05721971 71.50635367 71.23118285 71.56113545 71.56776239 73.05972939
- 73.08250744 74.56329023 76.79512481 74.20533479 72.49144642 73.07689257
- 72.16620216 73.29188537]
+[70.49951834 70.1299055  70.71083382 69.92671529 70.36612862 70.14270695
+ 69.46986584 69.85713422 69.7853119  69.89271411 70.77508121 71.62557837
+ 72.39170002 72.11318111 72.83302367 71.75478947 72.11059154 73.66624147
+ 72.29808509 71.87726432 72.05937138 72.42824549 71.98435316 72.24383613
+ 72.13157375 72.0712229  72.14669981 72.33741789 72.5867288  72.44292541
+ 74.31487733 74.20368009 77.78053316 73.58388048 72.41755972 72.34645656
+ 71.23826656 72.56089046]
 
-=== Drop base: ===
-[[1.92934707 4.88357022]
- [1.92939055 4.88213705]
- [1.9294059  4.87987593]
- [1.92838685 4.88230159]
- [1.92931732 4.88091349]
- [1.92864203 4.88004908]
- [1.92841013 4.88244095]
- [1.92819769 4.88182788]
- [1.92878161 4.87739426]
- [1.92828479 4.87678923]
- [1.8123559  4.96065597]
- [1.65386226 5.13711602]
- [1.49540105 5.30579731]
- [1.36169947 5.42793154]
- [1.31230875 5.57112045]
- [1.12948343 5.58552115]
- [1.0635439  5.69419133]
- [1.07904108 5.81586566]
- [1.07044106 5.80780901]
- [1.07149772 5.8031047 ]
- [1.07234249 5.79946514]
- [1.06430916 5.80621992]
- [1.06266364 5.80193666]
- [1.07190157 5.79594741]
- [1.06221319 5.80084337]
- [1.06262739 5.7994491 ]
- [1.06290811 5.79973602]
- [1.06261745 5.79818615]
- [1.07110155 5.79363283]
- [1.136702   5.73827396]
- [1.22100692 5.60771593]
- [1.35406724 5.47564621]
- [1.47956351 5.35478322]
- [1.58778352 5.22749747]
- [1.74789859 5.07840671]
- [1.82160408 5.01571592]
- [1.82934729 5.01013236]
- [1.82893682 5.00764041]]
+=== Drop contact positions: ===
+[[1.93832964 4.90852869]
+ [1.9383381  4.90723033]
+ [1.93861383 4.90483267]
+ [1.93671908 4.90809455]
+ [1.93600406 4.90858664]
+ [1.93615952 4.9070416 ]
+ [1.93634843 4.90952053]
+ [1.93689621 4.90750024]
+ [1.93664427 4.90404155]
+ [1.93673364 4.90270441]
+ [1.82986022 4.97697942]
+ [1.66242062 5.1632435 ]
+ [1.50391141 5.3317036 ]
+ [1.37008729 5.45485383]
+ [1.31325928 5.60250705]
+ [1.12961601 5.61792064]
+ [1.07022579 5.72288739]
+ [1.08781048 5.84436594]
+ [1.07971978 5.83596298]
+ [1.07061923 5.83787147]
+ [1.07040238 5.83480219]
+ [1.07000855 5.83446575]
+ [1.07021225 5.83108282]
+ [1.07119756 5.83159342]
+ [1.07091224 5.82816593]
+ [1.07048666 5.82537719]
+ [1.07006687 5.82606727]
+ [1.07056253 5.82534949]
+ [1.07072783 5.82771558]
+ [1.14615126 5.76372021]
+ [1.22834386 5.63496423]
+ [1.3624827  5.50338496]
+ [1.48844526 5.38162034]
+ [1.59604399 5.25495474]
+ [1.75512248 5.10651467]
+ [1.83889684 5.0346689 ]
+ [1.83687488 5.03739273]
+ [1.83756333 5.03659173]]
 </code></pre>
 
 

@@ -1,15 +1,14 @@
 #!/bin/env python3
 # coding: utf-8
 
-import pyDSA as dsa
+import pyDSA as dsa   
 import matplotlib.pyplot as plt
 
 # Import an image
 ims = dsa.import_from_video('data/video.mp4',
                             dx=1/120, dy=1/120, dt=1/10,
                             unit_x='mm', unit_y='mm', unit_t='s',
-                            incr=1)
-
+                            incr=10)
 # Display
 ims.display()
 plt.show()
@@ -18,7 +17,7 @@ plt.show()
 ims.set_baseline([0.0, 0.583],
                  [6.492, 0.57])
 edges = ims.edge_detection()
-edges.fit()
+edges.fit(s=0.01)
 edges.compute_contact_angle()
 
 # Display
@@ -47,6 +46,6 @@ print("\n=== Right contact angle: ===")
 print(thetas[:, 1])
 
 radius = edges.get_drop_base()
-print("\n=== Drop base: ===")
+print("\n=== Drop contact positions: ===")
 print(radius)
 

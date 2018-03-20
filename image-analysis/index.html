@@ -67,6 +67,12 @@
       <a href="/Python-cookbook/import-data/">Importing Data</a>
       </div>
     </li>
+    <li data-nav-id="/Python-cookbook/publication_quality_plots/" class="dd-item
+        ">
+      <div>
+      <a href="/Python-cookbook/publication_quality_plots/">Publication-quality plots</a>
+      </div>
+    </li>
 
 
 
@@ -90,6 +96,8 @@
    Drop Shape analysis using pyDSA (video)</option>
     <option value="/Python-cookbook/import-data/" >
    Importing Data</option>
+    <option value="/Python-cookbook/publication_quality_plots/" >
+   Publication-quality plots</option>
 
 
 
@@ -135,23 +143,29 @@ At the end of it, we will have gathered the important characteristics of the dro
 <li>the apparent contact angles</li>
 </ul>
 
-<h2 id="installation-of-the-needed-packages">Installation of the needed packages</h2>
+<h2 id="installing-the-needed-packages">Installing the needed packages</h2>
 
-<p>During this tutorial, we will need several python packages that need to be installed on your environment.
+<h3 id="basic-packages">Basic packages</h3>
+
+<p>During this tutorial, we will need several python packages that has to be installed on your environment.
 The majority of the needed packages can be installed from <a href="https://pypi.python.org/pypi">PyPI</a> using the following command:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">pip install imageio matplotlib numpy scipy</code></pre></div>
 <p>Or for conda users:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">conda install imageio matplotlib numpy scipy</code></pre></div>
-<p>You will also need <a href="https://opencv.org">OpenCV</a> to be installed.
+<h3 id="opencv">OpenCV</h3>
+
+<p>We will also need <a href="https://opencv.org">OpenCV</a> to be installed.
 For conda users on windows, you should be able to get this working with the following command:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">conda install opencv</code></pre></div>
 <p>Or this one:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">conda install -c menpo opencv</code></pre></div>
+<p>For Linux users, get OpenCV from your distribution repository or build it from <a href="https://opencv.org/releases.html">source</a>.</p>
+
 <h2 id="importing-images">Importing images</h2>
 
-<p><a href="http://imageio.readthedocs.io/en/latest/index.html">Imageio</a> package allows to import and export a variety of image format (see <a href="http://imageio.readthedocs.io/en/latest/formats.html">here</a> for an exhaustive list).</p>
+<p><a href="http://imageio.readthedocs.io/en/latest/index.html">Imageio</a> package allows to import and export a variety of image formats (see <a href="http://imageio.readthedocs.io/en/latest/formats.html">here</a> for an exhaustive list).</p>
 
-<p>Imageio can also import video or grab images directly from a camera.</p>
+<p>Imageio can also import videos or grab images directly from cameras.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">imageio</span>
 image <span style="color:#666">=</span> imageio<span style="color:#666">.</span>imread(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/image.bmp&#39;</span>)</code></pre></div>
 <div class="expand">
@@ -198,9 +212,10 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
   </div>
   <div class="expand-content" style="display: none;text-indent:0px">
     <font color="grey">
-      <p>We first imports the <code>pyplot</code> module from matplotlib.
-The <code>Pyplot</code> module is the main module for plotting data in a Matlab-way.<br />
-We then create a figure with <code>plt.figure()</code>, display the image in it with <code>plt.imshow()</code>, add a colorbar with <code>plt.colorbar()</code> and show the results with <code>plt.show()</code></p>
+      <p>We first imports the <code>pyplot</code> submodule from matplotlib.
+The <code>Pyplot</code> module is the main submodule for plotting data in a Matlab-way.<br />
+We then create a figure with <code>plt.figure()</code>, display the image in it with <code>plt.imshow()</code>, add a colorbar with <code>plt.colorbar()</code> and show the results with <code>plt.show()</code>.<br />
+Depending on your IDE, you may not need the last line, as the figures will automatically be shown.</p>
 
     </font>
   </div>
@@ -210,7 +225,8 @@ We then create a figure with <code>plt.figure()</code>, display the image in it 
 
 <p>The drop is centered on the image, but a part of the syringe that was used to drop it is also visible at the top.</p>
 
-<p>As an edge detection performed on this image will certainly detect the syringe edges, it is a good idea to restrain the area of interest around the drop.</p>
+<p>An edge detection performed directly on this image will certainly detect the syringe edges.
+To avoid that, we will restrain the area of interest around the drop.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">image <span style="color:#666">=</span> image[<span style="color:#40a070">200</span>:<span style="color:#40a070">400</span>, <span style="color:#40a070">200</span>:<span style="color:#40a070">550</span>]
 
 <span style="color:#60a0b0;font-style:italic"># Display</span>
@@ -234,9 +250,9 @@ plt<span style="color:#666">.</span>show()
   </div>
   <div class="expand-content" style="display: none;text-indent:0px">
     <font color="grey">
-      <p>The <code>image</code> variable is an array and can be cropped using indices.
-It is here cropped from indice 200 to 550 on the x axis and from 200 to 400 on the y axis.
-Because of the way image are referenced by the Imageio and matplotlib packages, the y axis has to be specified first.<br />
+      <p>The <code>image</code> variable is an array of numbers that can be cropped using indexes.
+It is here cropped from indexes 200 to 550 on the x axis and from indexes 200 to 400 on the y axis.
+Because of the way images are referenced by the Imageio and matplotlib packages, the y axis has to be specified first.<br />
 We then display the image.</p>
 
     </font>
@@ -245,18 +261,18 @@ We then display the image.</p>
 
 <h2 id="edge-detection">Edge detection</h2>
 
-<p><a href="https://opencv.org/">OpenCV</a> (Open Source Computer Vision Library) is a well-known library for image analysis that provides a python interface.
+<p><a href="https://opencv.org/">OpenCV</a> (Open Source Computer Vision Library) is a well-known library for image analysis that provides a Python interface.
 We will use one of its edge detection functions to get the edge of our drop.
 More specifically, we will use the <a href="https://en.wikipedia.org/wiki/Canny_edge_detector">Canny edge detector</a>.</p>
 
-<p>This method necessitates to specify two threshold values, that have to be optimized depending on the nature/quality of the edges to detect.
+<p>This edge detector method necessitates to specify two threshold values, that have to be optimized depending on the nature/quality of the edges to detect.
 A first good guess is generally to take the minimal and maximal pixel values as thresholds.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">cv2</span>
 thres1 <span style="color:#666">=</span> image<span style="color:#666">.</span><span style="color:#007020">min</span>()
 thres2 <span style="color:#666">=</span> image<span style="color:#666">.</span><span style="color:#007020">max</span>()
 edges <span style="color:#666">=</span> cv2<span style="color:#666">.</span>Canny(image, thres1, thres2)
 
-<span style="color:#60a0b0;font-style:italic"># Display the obtained edges</span>
+<span style="color:#60a0b0;font-style:italic"># Display the edges</span>
 plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>imshow(edges)
 plt<span style="color:#666">.</span>show()</code></pre></div>
@@ -279,21 +295,28 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
       <p>We import opencv with <code>import cv2</code>.<br />
 Minimal and maximal pixel values are obtained using the <code>min()</code> and <code>max()</code> methods and stored.<br />
 Those values are then used as arguments of the OpenCV edge detector: <code>Canny()</code>.<br />
-The result is stored in the <code>edges</code> variable, and displayed.</p>
+The result is an array of numbers, stored in the <code>edges</code> variable.<br />
+This array of numbers id finally displayed.</p>
 
     </font>
   </div>
 </div>
 
-<p>The <code>Canny()</code> function returns an array of number that is equal to 1 (in yellow here) where edges have been detected.</p>
+<p>The <code>Canny()</code> function returns an array of numbers that is equal to 1 (in yellow here) where edges have been detected, and 0 (in blue here) elsewhere.</p>
 
 <p>OpenCV successfully detects the drop edges, but also some structures near the sample surface.
 Lets improve the threshold values to get rid of those unwanted bits.</p>
+
+<div class="alert 
+	alert-info"
+ 
+role="alert">Some methods, like the <a href="https://en.wikipedia.org/wiki/Otsu%27s_method">Otsu method</a>, can be used to automatically infers good threshold values from an image.</div>
+
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">thres1 <span style="color:#666">=</span> image<span style="color:#666">.</span><span style="color:#007020">min</span>()<span style="color:#666">*</span><span style="color:#40a070">0.75</span>
 thres2 <span style="color:#666">=</span> image<span style="color:#666">.</span><span style="color:#007020">max</span>()<span style="color:#666">*</span><span style="color:#40a070">1.5</span>
 edges <span style="color:#666">=</span> cv2<span style="color:#666">.</span>Canny(image, thres1, thres2)
 
-<span style="color:#60a0b0;font-style:italic"># Display the obtained edges</span>
+<span style="color:#60a0b0;font-style:italic"># Display the edges</span>
 plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>imshow(edges)
 plt<span style="color:#666">.</span>show()</code></pre></div>
@@ -313,7 +336,7 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
   </div>
   <div class="expand-content" style="display: none;text-indent:0px">
     <font color="grey">
-      <p>The block is mainly similar to the previous one.<br />
+      <p>This block is mainly similar to the previous one.<br />
 The threshold values are just adjusted to get rid of the unwanted edges near the sample surface.
 The thresholds values are now 0.75 times the minimal pixel value and 1.5 times the maximal pixel value.</p>
 
@@ -321,11 +344,11 @@ The thresholds values are now 0.75 times the minimal pixel value and 1.5 times t
   </div>
 </div>
 
-<p>We got rid of some of the unwanted bits, but we still detect some weird shapers due to the reflection of the drop on the sample.
-We can remove them by deleting all the edges present below the baseline, that is here toughly around y=180.</p>
+<p>We got rid of some of the unwanted bits, but we still detect some weird shapes due to the reflection of the drop on the sample (around x=50, y=200 for example).
+We can remove them by deleting all the edges detected below the baseline, that is here roughly y=180.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">edges[<span style="color:#40a070">180</span>:, :] <span style="color:#666">=</span> <span style="color:#40a070">0</span>
 
-<span style="color:#60a0b0;font-style:italic"># Display the obtained edges</span>
+<span style="color:#60a0b0;font-style:italic"># Display the edges</span>
 plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>imshow(edges)
 plt<span style="color:#666">.</span>show()</code></pre></div>
@@ -345,8 +368,9 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
   </div>
   <div class="expand-content" style="display: none;text-indent:0px">
     <font color="grey">
-      <p><code>edges</code> is an array containing 1 where edges were detected.
-To remove edges for y&lt;180, we just need to fill the array with 0 for y&lt;180 with <code>edges[180:, :] = 0</code>.</p>
+      <p><code>edges</code> is an array containing 1 where edges were detected and 0 elsewhere.
+To remove edges for y&lt;180, we just need to fill the array with 0 for y&lt;180.<br />
+This is done by specifying that the values of <code>edges</code> from y=180 to infinity (<code>180:</code>) and for every x (<code>:</code>) are set to 0.</p>
 
     </font>
   </div>
@@ -354,7 +378,8 @@ To remove edges for y&lt;180, we just need to fill the array with 0 for y&lt;180
 
 <h2 id="from-image-to-points">From image to points</h2>
 
-<p>Drop edge is for the moment stored as an image, if we want to access its coordinates, we need to find the positions of each non-null pixels (yellow pixels).</p>
+<p>Our drop edge is for the moment stored as an array of 0 and 1.
+If we want to access the edge coordinates, we need to find the positions of each pixel equal to 1 (yellow pixels here).</p>
 
 <p>The <a href="http://www.numpy.org/">numpy</a> package can help us do that by detecting where the pixel values are not zero.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">numpy</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">np</span>
@@ -362,7 +387,7 @@ ys, xs <span style="color:#666">=</span> np<span style="color:#666">.</span>wher
 ys <span style="color:#666">=</span> np<span style="color:#666">.</span>asarray(<span style="color:#666">-</span>ys, dtype<span style="color:#666">=</span><span style="color:#007020">float</span>)
 xs <span style="color:#666">=</span> np<span style="color:#666">.</span>asarray(xs, dtype<span style="color:#666">=</span><span style="color:#007020">float</span>)
 
-<span style="color:#60a0b0;font-style:italic"># Plot the edges</span>
+<span style="color:#60a0b0;font-style:italic"># Display the edges</span>
 plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
 plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
@@ -385,19 +410,19 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
     <font color="grey">
       <p>We import numpy with <code>import numpy as np</code>.<br />
 The <code>np.where()</code> function returns the positions of the array that are not equal to zero.
-Which are here the positions of the edges.<br />
+Which are here the positions of our drop edge.<br />
 The two following lines allow to transform the position from integers to floating point values.
-This is needed for the next steps.<br />
+This will be needed for the next steps.<br />
 <code>plt.plot()</code> allows to plot the edge points position.<br />
-<code>plt.axis('equal')</code> ensures that the image is not deformed (stretched).</p>
+<code>plt.axis('equal')</code> ensures that the image is not deformed (stretched) along x or y.</p>
 
     </font>
   </div>
 </div>
 
-<p>For convenience, we want to center the drop edge on the referential.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xs <span style="color:#666">-=</span> xs<span style="color:#666">.</span>mean()
-ys <span style="color:#666">-=</span> ys<span style="color:#666">.</span><span style="color:#007020">min</span>()
+<p>For convenience, we want to center the drop on the referential.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xs <span style="color:#666">=</span> xs <span style="color:#666">-</span> xs<span style="color:#666">.</span>mean()
+ys <span style="color:#666">=</span> ys <span style="color:#666">-</span> ys<span style="color:#666">.</span><span style="color:#007020">min</span>()
 
 <span style="color:#60a0b0;font-style:italic"># Plot the edges</span>
 plt<span style="color:#666">.</span>figure()
@@ -422,7 +447,8 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
   <div class="expand-content" style="display: none;text-indent:0px">
     <font color="grey">
       <p><code>xs.mean()</code> allows to access the average position of the edges along x.<br />
-<code>ys.min()</code> allows to access the minimal position of the edges along y.</p>
+<code>ys.min()</code> allows to access the minimal position of the edges along y.<br />
+By substracting those values to x and y, we ensure that the origin of our referential is at the base of the drop.</p>
 
     </font>
   </div>
@@ -430,57 +456,79 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 
 <h2 id="from-pixels-to-mm">From pixels to mm</h2>
 
-<p>We now know the edge position in pixel.
-To pass this information into millimeters, we just need to know the ratio between pixels and mm for our image.</p>
+<p>We achieved to get the edge coordinated in pixel.
+To pass this information into millimeters, we need to know the ratio between pixels and mm for our base image.</p>
 
 <p>It can be done by measuring the syringe diameter (here ~60 pixels) that we know is about 0.5mm.
 This gives us a resolution of 120px/mm.</p>
 
-<p>We then just need to scale our edge positions:</p>
+<p>We can now scale our edge coordinates:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">res <span style="color:#666">=</span> <span style="color:#40a070">120</span> 
 xs <span style="color:#666">/=</span> res
 ys <span style="color:#666">/=</span> res
 
-<span style="color:#60a0b0;font-style:italic"># Plot the edges</span>
-plt<span style="color:#666">.</span>figure()
+<span style="color:#60a0b0;font-style:italic"># Plot the edge</span>
+fig, axs <span style="color:#666">=</span> plt<span style="color:#666">.</span>subplots(<span style="color:#40a070">1</span>, <span style="color:#40a070">2</span>, figsize<span style="color:#666">=</span>(<span style="color:#40a070">10</span>, <span style="color:#40a070">4</span>))
+plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">0</span>])
 plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
 plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;k&#39;</span>)
 plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
 plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;x [mm]&#39;</span>)
 plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;y [mm]&#39;</span>)
+<span style="color:#60a0b0;font-style:italic"># Plot a zoom on the edge</span>
+plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">1</span>])
+plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
+plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;k&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;x [mm]&#39;</span>)
+plt<span style="color:#666">.</span>xlim(<span style="color:#666">-</span><span style="color:#40a070">1.15</span>, <span style="color:#666">-</span><span style="color:#40a070">0.9</span>)
+plt<span style="color:#666">.</span>ylim(<span style="color:#666">-</span><span style="color:#40a070">0.05</span>, <span style="color:#40a070">0.3</span>)
+plt<span style="color:#666">.</span>title(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;Zoom&#34;</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_27_0.png" alt="png" /></p>
 
 <h2 id="fitting-the-edge">Fitting the edge</h2>
 
-<p>Problem with the edge positions we obtained at this point is that they are at discrete positions (because extracted from an image).
-It is impossible as it to obtain contact angles or triple point position.
-In order to go further, we have to find a good fitting of the drop edge.</p>
+<p>Problem with the edge coordinates we obtained at this point is that they are at discrete positions (because extracted from an image).
+It is impossible to obtain contact angles or triple point position from this kind of discretized data.
+In order to go further, we need to find a good fitting of the drop edge.</p>
 
-<p>The <a href="https://www.scipy.org/">Scipy</a> package provides several ways of fitting data.
-Here, as we don&rsquo;t care about the mathematical expression of our fitting, we will use a spline fitting.</p>
+<p>The <a href="https://www.scipy.org/">Scipy</a> package provides several ways of fitting different kind of data.
+Here, as we don&rsquo;t care about the mathematical expression of our fitting, we will use a spline fitting: <code>UnivariateSpline</code>.</p>
 
-<p>The Scipy fitting function needs the data to be sorted (strictly increasing x values).
-We then need to fist ensure that our edges points are sorted.</p>
+<p>This fitting function needs the data to be sorted and with strictly increasing x values.
+Our edge coordinated need some transformation to fit those specifications.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># Ensure increasing x values</span>
 new_xs <span style="color:#666">=</span> np<span style="color:#666">.</span>sort(<span style="color:#007020">list</span>(<span style="color:#007020">set</span>(xs)))
 new_ys <span style="color:#666">=</span> []
 <span style="color:#007020;font-weight:bold">for</span> x <span style="color:#007020;font-weight:bold">in</span> new_xs:
     new_ys<span style="color:#666">.</span>append(np<span style="color:#666">.</span>mean(ys[xs <span style="color:#666">==</span> x]))
 xs <span style="color:#666">=</span> new_xs
-ys <span style="color:#666">=</span> new_ys
-<span style="color:#60a0b0;font-style:italic"># Find a fit</span>
+ys <span style="color:#666">=</span> np<span style="color:#666">.</span>asarray(new_ys)
+
+<span style="color:#60a0b0;font-style:italic"># Fitting the drop edge</span>
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">scipy.interpolate</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">spint</span>
 edge_f <span style="color:#666">=</span> spint<span style="color:#666">.</span>UnivariateSpline(xs, ys, k<span style="color:#666">=</span><span style="color:#40a070">5</span>, s<span style="color:#666">=</span><span style="color:#40a070">0.005</span>)
 
 <span style="color:#60a0b0;font-style:italic"># Display the fit</span>
-plt<span style="color:#666">.</span>figure()
+fig, axs <span style="color:#666">=</span> plt<span style="color:#666">.</span>subplots(<span style="color:#40a070">1</span>, <span style="color:#40a070">2</span>, figsize<span style="color:#666">=</span>(<span style="color:#40a070">10</span>, <span style="color:#40a070">4</span>))
+plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">0</span>])
 plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
 plt<span style="color:#666">.</span>plot(xs, edge_f(xs))
 plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;k&#39;</span>)
 plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;x [mm]&#39;</span>)
 plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;y [mm]&#39;</span>)
 plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+<span style="color:#60a0b0;font-style:italic"># Plot a zoom on the edge</span>
+plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">1</span>])
+plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
+plt<span style="color:#666">.</span>plot(xs, edge_f(xs))
+plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;k&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;x [mm]&#39;</span>)
+plt<span style="color:#666">.</span>xlim(<span style="color:#666">-</span><span style="color:#40a070">1.1</span>, <span style="color:#666">-</span><span style="color:#40a070">0.7</span>)
+plt<span style="color:#666">.</span>ylim(<span style="color:#40a070">0</span>, <span style="color:#40a070">0.5</span>)
+plt<span style="color:#666">.</span>title(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;Zoom&#34;</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_29_0.png" alt="png" /></p>
 
@@ -510,22 +558,22 @@ We then display the edge and its fitting.</p>
 
 <h2 id="getting-the-drop-basic-properties">Getting the drop basic properties</h2>
 
-<p>We can know extract some information from our data.
-It is quite straightforward to get the drop base radius and height:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">base_radius <span style="color:#666">=</span> np<span style="color:#666">.</span><span style="color:#007020">max</span>(xs) <span style="color:#666">-</span> np<span style="color:#666">.</span><span style="color:#007020">min</span>(xs)
-height <span style="color:#666">=</span> np<span style="color:#666">.</span><span style="color:#007020">max</span>(ys)
+<p>We can now extract some information from our data, like the drop base length or the drop height:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">base_radius <span style="color:#666">=</span> xs<span style="color:#666">.</span><span style="color:#007020">max</span>() <span style="color:#666">-</span> xs<span style="color:#666">.</span><span style="color:#007020">min</span>()
+height <span style="color:#666">=</span> ys<span style="color:#666">.</span><span style="color:#007020">max</span>()
 
 <span style="color:#60a0b0;font-style:italic"># Print</span>
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;Base radius: {} mm&#34;</span><span style="color:#666">.</span>format(base_radius))
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;Drop base: {} mm&#34;</span><span style="color:#666">.</span>format(base_radius))
 <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;Drop height: {} mm&#34;</span><span style="color:#666">.</span>format(height))</code></pre></div>
-<pre><code>Base radius: 2.091666666666667 mm
+<pre><code>Drop base: 2.091666666666667 mm
 Drop height: 0.85 mm
 </code></pre>
 
 <h2 id="getting-the-contact-angles">Getting the contact angles</h2>
 
-<p>The contact angles are the angles done by our fitted curve where it meets the baseline (here <code>y=0</code>).</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">left_x <span style="color:#666">=</span> np<span style="color:#666">.</span><span style="color:#007020">min</span>(xs)
+<p>The contact angles are the angles made by our fitted curve and the baseline (here <code>y=0</code>).</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># Get left and right contact points</span>
+left_x <span style="color:#666">=</span> np<span style="color:#666">.</span><span style="color:#007020">min</span>(xs)
 right_x <span style="color:#666">=</span> np<span style="color:#666">.</span><span style="color:#007020">max</span>(xs)
 dx <span style="color:#666">=</span> (right_x <span style="color:#666">-</span> left_x)<span style="color:#666">/</span><span style="color:#40a070">100</span>
 
@@ -542,7 +590,7 @@ theta_right <span style="color:#666">=</span> np<span style="color:#666">.</span
 <span style="color:#007020;font-weight:bold">print</span>(theta_left<span style="color:#666">/</span>np<span style="color:#666">.</span>pi<span style="color:#666">*</span><span style="color:#40a070">180</span>)
 <span style="color:#007020;font-weight:bold">print</span>(theta_right<span style="color:#666">/</span>np<span style="color:#666">.</span>pi<span style="color:#666">*</span><span style="color:#40a070">180</span>)
 
-<span style="color:#60a0b0;font-style:italic"># Display the fit</span>
+<span style="color:#60a0b0;font-style:italic"># Display the fit and the angles</span>
 plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
 plt<span style="color:#666">.</span>plot(xs, edge_f(xs))
@@ -576,11 +624,11 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
   </div>
   <div class="expand-content" style="display: none;text-indent:0px">
     <font color="grey">
-      <p>We first determine the position of the drop edge contact with the baseline along x.<br />
-We then use the <code>derivative</code> function from Scipy to get the edges gradient at each contacts using the previous fitting.<br />
+      <p>We first determine the positions of the drop edge contact with the baseline along x.<br />
+We then use the <code>derivative</code> function from Scipy to get the edge local slope at each contacts using our fitting.<br />
 <code>dx</code> is used by the derivation algorithm. you can use a smaller value to get a more accurate result.<br />
-The edge gradients are then translated to angles.<br />
-The contact angle are then printed and displayed.</p>
+The edge local gradients are then translated to angles.<br />
+We then print and display the contact angles.</p>
 
     </font>
   </div>

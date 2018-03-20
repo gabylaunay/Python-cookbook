@@ -67,6 +67,12 @@
       <a href="/Python-cookbook/import-data/">Importing Data</a>
       </div>
     </li>
+    <li data-nav-id="/Python-cookbook/publication_quality_plots/" class="dd-item
+        ">
+      <div>
+      <a href="/Python-cookbook/publication_quality_plots/">Publication-quality plots</a>
+      </div>
+    </li>
 
 
 
@@ -90,6 +96,8 @@
    Drop Shape analysis using pyDSA (video)</option>
     <option value="/Python-cookbook/import-data/" >
    Importing Data</option>
+    <option value="/Python-cookbook/publication_quality_plots/" >
+   Publication-quality plots</option>
 
 
 
@@ -132,7 +140,7 @@
 
 <p>You will first need to install <a href="https://github.com/gabylaunay/IMTreatment">IMTreatment</a> by downloading the package <a href="https://github.com/gabylaunay/IMTreatment/archive/master.zip">here</a>, extracting it and installing it with:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python3 setup.py install</code></pre></div>
-<p>pyDSA also use <a href="https://opencv.org">OpenCV</a> as a dependency, so you will need it installed as well.</p>
+<p>pyDSA also use <a href="https://opencv.org">OpenCV</a> for edge detection, so you will need it installed as well.</p>
 
 <h3 id="install-pydsa">Install pyDSA</h3>
 
@@ -147,7 +155,7 @@
 <span style="color:#60a0b0;font-style:italic"># Import an image</span>
 im <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_from_image(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/image.bmp&#39;</span>, dx<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, dy<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, unit_x<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_y<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;mm&#39;</span>)
 
-<span style="color:#60a0b0;font-style:italic"># Display</span>
+<span style="color:#60a0b0;font-style:italic"># Display it</span>
 plt<span style="color:#666">.</span>figure()
 im<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
@@ -164,13 +172,13 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 
 <h2 id="setting-the-baseline">Setting the baseline</h2>
 
-<p>The interactive function <code>im.choose_baseline()</code> can be used to interactively set the baseline.
-It will display the drop and ask you to put several baseline points by clicking on the image.</p>
+<p>pyDSA provides an interactive function <code>im.choose_baseline()</code> to interactively set the baseline.
+It will display the drop image and ask you to put baseline points by clicking on the image.</p>
 
-<p>Here we are gonna use the non-interactive function <code>im.set_baseline()</code>.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">im<span style="color:#666">.</span>set_baseline([<span style="color:#40a070">2</span>, <span style="color:#40a070">1.61</span>], [<span style="color:#40a070">4.5</span>, <span style="color:#40a070">1.61</span>])
+<p>Here, we are gonna use the non-interactive function <code>im.set_baseline()</code> to set the baseline.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">im<span style="color:#666">.</span>set_baseline(pt1<span style="color:#666">=</span>[<span style="color:#40a070">2</span>, <span style="color:#40a070">1.61</span>], pt2<span style="color:#666">=</span>[<span style="color:#40a070">4.5</span>, <span style="color:#40a070">1.61</span>])
 
-<span style="color:#60a0b0;font-style:italic"># Display</span>
+<span style="color:#60a0b0;font-style:italic"># DisplayF</span>
 plt<span style="color:#666">.</span>figure()
 im<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
@@ -189,16 +197,16 @@ edge<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="pydsa_files/pydsa_9_0.png" alt="png" /></p>
 
-<p>If the edge detection is not good enough, the <code>edge_detection</code> function has several optional arguments that can help you get the edges you want.
-Please refer to the documentation of this function if you want to know more about this.</p>
+<p>If the edge detection is not good enough, the <code>edge_detection</code> function provides several optional arguments that can help you get the edges you want.
+Please refer to the inline documentation of this function if you want to know more about this.</p>
 
 <h2 id="fitting-the-edge">Fitting the edge</h2>
 
 <p>Computing the contact angles will necessitates the edges to be fitted by a curve of some kind.
-pyDSA uses a spline to get a continuous definition of the drop edge.</p>
+pyDSA uses a spline fitting to achieve this.</p>
 
-<p>The parameter <code>s</code> can be tuned to adapt the fitting.
-Small values of <code>s</code> mean more accurate fitting.</p>
+<p>The parameter <code>s</code> can be tuned to adapt the fitting:
+small values of <code>s</code> means a more accurate fitting, and bigger values of <code>s</code> a smoother fitting.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">edge<span style="color:#666">.</span>fit(s<span style="color:#666">=</span><span style="color:#40a070">0.0005</span>)
 
 <span style="color:#60a0b0;font-style:italic"># Display the edge</span>
@@ -207,12 +215,12 @@ edge<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="pydsa_files/pydsa_12_0.png" alt="png" /></p>
 
-<p>The edge fit is displayed in orange on top of the detected edge.</p>
+<p>The edge fitting is displayed in orange.</p>
 
 <h2 id="detecting-the-triple-points">Detecting the triple points</h2>
 
-<p>In the case of a SLIPS surface, pyDSA can detect the triple point (triple point of contact between the oil, water and air).
-This is done by detecting the edge fit point of inflexion.</p>
+<p>In the case of a SLIPS surface, pyDSA can detect the triple points of contact between the oil, water and air (e.g. the ridge top).
+This is done by detecting the point of inflexion of the edge line.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">edge<span style="color:#666">.</span>detect_triple_points()
 
 <span style="color:#60a0b0;font-style:italic"># Display the edge</span>
@@ -221,20 +229,29 @@ edge<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="pydsa_files/pydsa_15_0.png" alt="png" /></p>
 
-<p>The triple points are displayed in purple on the detected edge.</p>
+<p>The triple points are displayed in purple.</p>
 
 <h2 id="computing-the-contact-angles">Computing the contact angles</h2>
 
-<p>pyDSA uses the edge fitting to compute the contact angle at the contact between the drop and the baseline.</p>
-
-<p>If triple points have been detected successfully, the apparent contact angle at the triple points are also computed.</p>
+<p>pyDSA uses the edge fitting to compute two kind of contact angles:
+- the contact angles between the drop and the baseline.
+- the apparent contact angles at the triple point (if a triple point is present).</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">edge<span style="color:#666">.</span>compute_contact_angle()
 <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;Contact angles: {}&#39;</span><span style="color:#666">.</span>format(edge<span style="color:#666">.</span>thetas))
 <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;Triple point angles: {}&#39;</span><span style="color:#666">.</span>format(edge<span style="color:#666">.</span>thetas_triple))
 
 <span style="color:#60a0b0;font-style:italic"># Display the edge</span>
-plt<span style="color:#666">.</span>figure()
+fig, axs <span style="color:#666">=</span> plt<span style="color:#666">.</span>subplots(<span style="color:#40a070">1</span>, <span style="color:#40a070">2</span>, figsize<span style="color:#666">=</span>(<span style="color:#40a070">10</span>, <span style="color:#40a070">4</span>))
+plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">0</span>])
 edge<span style="color:#666">.</span>display()
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>ylim(<span style="color:#40a070">1.5</span>, <span style="color:#40a070">3</span>)
+<span style="color:#60a0b0;font-style:italic"># Zoom</span>
+plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">1</span>])
+edge<span style="color:#666">.</span>display()
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>ylim(<span style="color:#40a070">1.5</span>, <span style="color:#40a070">2</span>)
+plt<span style="color:#666">.</span>xlim(<span style="color:#40a070">2</span>, <span style="color:#40a070">2.3</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <pre><code>Contact angles: [48.90734602702736, 126.40314516490614]
 Triple point angles: [81.4670191340014, 96.86878969719106]
@@ -243,6 +260,8 @@ Triple point angles: [81.4670191340014, 96.86878969719106]
 <p><img src="pydsa_files/pydsa_18_1.png" alt="png" /></p>
 
 <h1 id="full-script">Full script</h1>
+
+<p>The whole process can be concentrated in a few lines of code, that allow to get from the drop image to the contact angles:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pyDSA</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">dsa</span>
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">matplotlib.pyplot</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">plt</span>
 
@@ -260,6 +279,15 @@ edge<span style="color:#666">.</span>display()
 im<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="pydsa_files/pydsa_20_0.png" alt="png" /></p>
+
+<h1 id="dealing-with-videos">Dealing with videos</h1>
+
+<p>pyDSA can directly import videos and automatically analyze them in batch.
+This is the subject of the next tutorial, available <a href="../pydsa_video/index.html">here</a>.</p>
+
+<h1 id="how-does-it-works">How does it works ?</h1>
+
+<p>If you want to know more about how pyDSA works, you can take a look at the <a href="../image-analysis/index.html">drop shape analysis tutorial</a>, or go through the code (on your machine, or <a href="https://github.com/gabylaunay/pyDSA">here</a>).</p>
 
 
 
