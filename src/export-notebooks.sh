@@ -49,7 +49,7 @@ for file in *.ipynb; do
     mv -f "${basename}.py" "script.py"
     # Make archives
     tar -czf "archive.tar.gz" "script.py" "data"
-    zip "archive.zip" "script.py" "data"
+    zip -r "archive.zip" "script.py" "data"
     # Move to content folder
     mkdir -p "$content_dir/$basename"
     mkdir -p "$content_dir/$basename/files"
