@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.38.2" />
 <title>Drop Shape analysis using Python :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
@@ -167,7 +167,7 @@ For conda users on windows, you should be able to get this working with the foll
 
 <p>Imageio can also import videos or grab images directly from cameras.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">imageio</span>
-image <span style="color:#666">=</span> imageio<span style="color:#666">.</span>imread(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/image.bmp&#39;</span>)</code></pre></div>
+image <span style="color:#666">=</span> imageio<span style="color:#666">.</span>imread(<span style="color:#4070a0">&#39;data/image.bmp&#39;</span>)</code></pre></div>
 <div class="expand">
   <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
     <font color="grey">
@@ -389,8 +389,8 @@ xs <span style="color:#666">=</span> np<span style="color:#666">.</span>asarray(
 
 <span style="color:#60a0b0;font-style:italic"># Display the edges</span>
 plt<span style="color:#666">.</span>figure()
-plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
-plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0">&#39;none&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0">&#39;equal&#39;</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_21_0.png" alt="png" /></p>
 
@@ -426,9 +426,9 @@ ys <span style="color:#666">=</span> ys <span style="color:#666">-</span> ys<spa
 
 <span style="color:#60a0b0;font-style:italic"># Plot the edges</span>
 plt<span style="color:#666">.</span>figure()
-plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
-plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;k&#39;</span>)
-plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0">&#39;none&#39;</span>)
+plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0">&#39;k&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0">&#39;equal&#39;</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_24_0.png" alt="png" /></p>
 
@@ -470,20 +470,20 @@ ys <span style="color:#666">/=</span> res
 <span style="color:#60a0b0;font-style:italic"># Plot the edge</span>
 fig, axs <span style="color:#666">=</span> plt<span style="color:#666">.</span>subplots(<span style="color:#40a070">1</span>, <span style="color:#40a070">2</span>, figsize<span style="color:#666">=</span>(<span style="color:#40a070">10</span>, <span style="color:#40a070">4</span>))
 plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">0</span>])
-plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
-plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;k&#39;</span>)
-plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
-plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;x [mm]&#39;</span>)
-plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;y [mm]&#39;</span>)
+plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0">&#39;none&#39;</span>)
+plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0">&#39;k&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0">&#39;x [mm]&#39;</span>)
+plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0">&#39;y [mm]&#39;</span>)
 <span style="color:#60a0b0;font-style:italic"># Plot a zoom on the edge</span>
 plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">1</span>])
-plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
-plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;k&#39;</span>)
-plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
-plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;x [mm]&#39;</span>)
+plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0">&#39;none&#39;</span>)
+plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0">&#39;k&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0">&#39;x [mm]&#39;</span>)
 plt<span style="color:#666">.</span>xlim(<span style="color:#666">-</span><span style="color:#40a070">1.15</span>, <span style="color:#666">-</span><span style="color:#40a070">0.9</span>)
 plt<span style="color:#666">.</span>ylim(<span style="color:#666">-</span><span style="color:#40a070">0.05</span>, <span style="color:#40a070">0.3</span>)
-plt<span style="color:#666">.</span>title(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;Zoom&#34;</span>)
+plt<span style="color:#666">.</span>title(<span style="color:#4070a0">&#34;Zoom&#34;</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_27_0.png" alt="png" /></p>
 
@@ -513,22 +513,22 @@ edge_f <span style="color:#666">=</span> spint<span style="color:#666">.</span>U
 <span style="color:#60a0b0;font-style:italic"># Display the fit</span>
 fig, axs <span style="color:#666">=</span> plt<span style="color:#666">.</span>subplots(<span style="color:#40a070">1</span>, <span style="color:#40a070">2</span>, figsize<span style="color:#666">=</span>(<span style="color:#40a070">10</span>, <span style="color:#40a070">4</span>))
 plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">0</span>])
-plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
+plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0">&#39;none&#39;</span>)
 plt<span style="color:#666">.</span>plot(xs, edge_f(xs))
-plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;k&#39;</span>)
-plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;x [mm]&#39;</span>)
-plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;y [mm]&#39;</span>)
-plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0">&#39;k&#39;</span>)
+plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0">&#39;x [mm]&#39;</span>)
+plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0">&#39;y [mm]&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0">&#39;equal&#39;</span>)
 <span style="color:#60a0b0;font-style:italic"># Plot a zoom on the edge</span>
 plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">1</span>])
-plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
+plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0">&#39;none&#39;</span>)
 plt<span style="color:#666">.</span>plot(xs, edge_f(xs))
-plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;k&#39;</span>)
-plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
-plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;x [mm]&#39;</span>)
+plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0">&#39;k&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0">&#39;x [mm]&#39;</span>)
 plt<span style="color:#666">.</span>xlim(<span style="color:#666">-</span><span style="color:#40a070">1.1</span>, <span style="color:#666">-</span><span style="color:#40a070">0.7</span>)
 plt<span style="color:#666">.</span>ylim(<span style="color:#40a070">0</span>, <span style="color:#40a070">0.5</span>)
-plt<span style="color:#666">.</span>title(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;Zoom&#34;</span>)
+plt<span style="color:#666">.</span>title(<span style="color:#4070a0">&#34;Zoom&#34;</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_29_0.png" alt="png" /></p>
 
@@ -563,8 +563,8 @@ We then display the edge and its fitting.</p>
 height <span style="color:#666">=</span> ys<span style="color:#666">.</span><span style="color:#007020">max</span>()
 
 <span style="color:#60a0b0;font-style:italic"># Print</span>
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;Drop base: {} mm&#34;</span><span style="color:#666">.</span>format(base_radius))
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;Drop height: {} mm&#34;</span><span style="color:#666">.</span>format(height))</code></pre></div>
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;Drop base: {} mm&#34;</span><span style="color:#666">.</span>format(base_radius))
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;Drop height: {} mm&#34;</span><span style="color:#666">.</span>format(height))</code></pre></div>
 <pre><code>Drop base: 2.091666666666667 mm
 Drop height: 0.85 mm
 </code></pre>
@@ -592,17 +592,17 @@ theta_right <span style="color:#666">=</span> np<span style="color:#666">.</span
 
 <span style="color:#60a0b0;font-style:italic"># Display the fit and the angles</span>
 plt<span style="color:#666">.</span>figure()
-plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;none&#39;</span>)
+plt<span style="color:#666">.</span>plot(xs, ys, marker<span style="color:#666">=</span><span style="color:#4070a0">&#39;o&#39;</span>, ls<span style="color:#666">=</span><span style="color:#4070a0">&#39;none&#39;</span>)
 plt<span style="color:#666">.</span>plot(xs, edge_f(xs))
-plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;k&#39;</span>)
+plt<span style="color:#666">.</span>axhline(<span style="color:#40a070">0</span>, color<span style="color:#666">=</span><span style="color:#4070a0">&#39;k&#39;</span>)
 angle_len <span style="color:#666">=</span> <span style="color:#666">.</span><span style="color:#40a070">6</span>
 plt<span style="color:#666">.</span>plot([left_x, left_x <span style="color:#666">+</span> angle_len<span style="color:#666">*</span>np<span style="color:#666">.</span>cos(theta_left)],
          [edge_f(left_x), edge_f(left_x) <span style="color:#666">+</span> angle_len<span style="color:#666">*</span>np<span style="color:#666">.</span>sin(theta_left)])
 plt<span style="color:#666">.</span>plot([right_x, right_x <span style="color:#666">+</span> angle_len<span style="color:#666">*</span>np<span style="color:#666">.</span>cos(theta_right)],
          [edge_f(right_x), edge_f(right_x) <span style="color:#666">+</span> angle_len<span style="color:#666">*</span>np<span style="color:#666">.</span>sin(theta_right)])
-plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;x [mm]&#39;</span>)
-plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;y [mm]&#39;</span>)
-plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0">&#39;x [mm]&#39;</span>)
+plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0">&#39;y [mm]&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0">&#39;equal&#39;</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <pre><code>74.74264462928066
 105.21597243751776

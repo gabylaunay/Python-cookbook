@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.38.2" />
 <title>Drop Shape analysis using pyDSA (video) :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
@@ -145,19 +145,13 @@ The video used is a side-view of a drop during an inflation-deflation sequence.<
 <h2 id="importing-a-video">Importing a video</h2>
 
 <p>Importing works in the same way than for an image.</p>
-
-<div class="alert 
-	alert-warning"
- 
-role="alert">Importing images in Python can easily fill your memory, you can import only some images of the video by using the <code>incr</code> argument.</div>
-
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pyDSA</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">dsa</span>   
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">matplotlib.pyplot</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">plt</span>
 
 <span style="color:#60a0b0;font-style:italic"># Import an image</span>
-ims <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_from_video(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/video.mp4&#39;</span>,
+ims <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_from_video(<span style="color:#4070a0">&#39;data/video.mp4&#39;</span>,
                             dx<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, dy<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, dt<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">10</span>,
-                            unit_x<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_y<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_t<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;s&#39;</span>,
+                            unit_x<span style="color:#666">=</span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_y<span style="color:#666">=</span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_t<span style="color:#666">=</span><span style="color:#4070a0">&#39;s&#39;</span>,
                             incr<span style="color:#666">=</span><span style="color:#40a070">10</span>)
 <span style="color:#60a0b0;font-style:italic"># Display</span>
 ims<span style="color:#666">.</span>display()
@@ -180,9 +174,9 @@ fig, axs <span style="color:#666">=</span> plt<span style="color:#666">.</span>s
     ind <span style="color:#666">=</span> <span style="color:#007020">int</span>(i<span style="color:#666">/</span><span style="color:#40a070">5</span><span style="color:#666">*</span>(<span style="color:#007020">len</span>(ims) <span style="color:#666">-</span> <span style="color:#40a070">1</span>))
     ims[ind]<span style="color:#666">.</span>_display()
     edges[ind]<span style="color:#666">.</span>display()
-    plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;&#39;</span>)
-    plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;&#39;</span>)
-    plt<span style="color:#666">.</span>title(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;t={:.2f}s&#39;</span><span style="color:#666">.</span>format(ims<span style="color:#666">.</span>times[ind]))
+    plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0">&#39;&#39;</span>)
+    plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0">&#39;&#39;</span>)
+    plt<span style="color:#666">.</span>title(<span style="color:#4070a0">&#39;t={:.2f}s&#39;</span><span style="color:#666">.</span>format(ims<span style="color:#666">.</span>times[ind]))
 plt<span style="color:#666">.</span>xlim(<span style="color:#40a070">0</span>, <span style="color:#40a070">6.5</span>)
 plt<span style="color:#666">.</span>ylim(<span style="color:#40a070">0</span>, <span style="color:#40a070">4.5</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
@@ -210,13 +204,13 @@ if we want to do further processing on them.</p>
 role="alert">Angles are defined in the trigonometric sens, from the horizontal line.</div>
 
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">thetas, thetas_t <span style="color:#666">=</span> edges<span style="color:#666">.</span>get_contact_angles()
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;=== Left contact angle: ===&#34;</span>)
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;=== Left contact angle: ===&#34;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(thetas[:, <span style="color:#40a070">0</span>])
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">=== Right contact angle: ===&#34;</span>)
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">=== Right contact angle: ===&#34;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(thetas[:, <span style="color:#40a070">1</span>])
 
 radius <span style="color:#666">=</span> edges<span style="color:#666">.</span>get_drop_base()
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">=== Drop contact positions: ===&#34;</span>)
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">=== Drop contact positions: ===&#34;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(radius)</code></pre></div>
 <pre><code>=== Left contact angle: ===
 [106.82124177 106.89153104 106.80195249 107.28297574 107.34363505

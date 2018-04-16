@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.38.2" />
 <title>Drop Shape analysis using pyDSA (image) :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
@@ -138,7 +138,7 @@
 
 <h3 id="dependencies">Dependencies</h3>
 
-<p>You will first need to install <a href="https://github.com/gabylaunay/IMTreatment">IMTreatment</a> by downloading the package <a href="https://github.com/gabylaunay/IMTreatment/archive/master.zip">here</a>, extracting it and installing it with:</p>
+<p>You will first need to install <a href="https://framagit.org/gabylaunay/IMTreatment">IMTreatment</a> by downloading the package <a href="https://framagit.org/gabylaunay/IMTreatment/repository/master/archive.zip">here</a>, extracting it and installing it with:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python3 setup.py install</code></pre></div>
 <p>pyDSA also use <a href="https://opencv.org">OpenCV</a> for edge detection, so you will need it installed as well.</p>
 
@@ -153,7 +153,7 @@
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">matplotlib.pyplot</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">plt</span>
 
 <span style="color:#60a0b0;font-style:italic"># Import an image</span>
-im <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_from_image(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/image.bmp&#39;</span>, dx<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, dy<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, unit_x<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_y<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;mm&#39;</span>)
+im <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_from_image(<span style="color:#4070a0">&#39;data/image.bmp&#39;</span>, dx<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, dy<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, unit_x<span style="color:#666">=</span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_y<span style="color:#666">=</span><span style="color:#4070a0">&#39;mm&#39;</span>)
 
 <span style="color:#60a0b0;font-style:italic"># Display it</span>
 plt<span style="color:#666">.</span>figure()
@@ -237,19 +237,19 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 - the contact angles between the drop and the baseline.
 - the apparent contact angles at the triple point (if a triple point is present).</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">edge<span style="color:#666">.</span>compute_contact_angle()
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;Contact angles: {}&#39;</span><span style="color:#666">.</span>format(edge<span style="color:#666">.</span>thetas))
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;Triple point angles: {}&#39;</span><span style="color:#666">.</span>format(edge<span style="color:#666">.</span>thetas_triple))
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#39;Contact angles: {}&#39;</span><span style="color:#666">.</span>format(edge<span style="color:#666">.</span>thetas))
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#39;Triple point angles: {}&#39;</span><span style="color:#666">.</span>format(edge<span style="color:#666">.</span>thetas_triple))
 
 <span style="color:#60a0b0;font-style:italic"># Display the edge</span>
 fig, axs <span style="color:#666">=</span> plt<span style="color:#666">.</span>subplots(<span style="color:#40a070">1</span>, <span style="color:#40a070">2</span>, figsize<span style="color:#666">=</span>(<span style="color:#40a070">10</span>, <span style="color:#40a070">4</span>))
 plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">0</span>])
 edge<span style="color:#666">.</span>display()
-plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0">&#39;equal&#39;</span>)
 plt<span style="color:#666">.</span>ylim(<span style="color:#40a070">1.5</span>, <span style="color:#40a070">3</span>)
 <span style="color:#60a0b0;font-style:italic"># Zoom</span>
 plt<span style="color:#666">.</span>sca(axs[<span style="color:#40a070">1</span>])
 edge<span style="color:#666">.</span>display()
-plt<span style="color:#666">.</span>axis(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;equal&#39;</span>)
+plt<span style="color:#666">.</span>axis(<span style="color:#4070a0">&#39;equal&#39;</span>)
 plt<span style="color:#666">.</span>ylim(<span style="color:#40a070">1.5</span>, <span style="color:#40a070">2</span>)
 plt<span style="color:#666">.</span>xlim(<span style="color:#40a070">2</span>, <span style="color:#40a070">2.3</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
@@ -265,7 +265,7 @@ Triple point angles: [81.4670191340014, 96.86878969719106]
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pyDSA</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">dsa</span>
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">matplotlib.pyplot</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">plt</span>
 
-im <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_from_image(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;data/image.bmp&#39;</span>, dx<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, dy<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, unit_x<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_y<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;mm&#39;</span>)
+im <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_from_image(<span style="color:#4070a0">&#39;data/image.bmp&#39;</span>, dx<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, dy<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, unit_x<span style="color:#666">=</span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_y<span style="color:#666">=</span><span style="color:#4070a0">&#39;mm&#39;</span>)
 im<span style="color:#666">.</span>crop(intervx<span style="color:#666">=</span>[<span style="color:#40a070">1.5</span>, <span style="color:#40a070">5</span>], intervy<span style="color:#666">=</span>[<span style="color:#40a070">1</span>, <span style="color:#40a070">3</span>], inplace<span style="color:#666">=</span>True)
 im<span style="color:#666">.</span>set_baseline([<span style="color:#40a070">2</span>, <span style="color:#40a070">1.61</span>], [<span style="color:#40a070">4.5</span>, <span style="color:#40a070">1.61</span>])
 edge <span style="color:#666">=</span> im<span style="color:#666">.</span>edge_detection()
