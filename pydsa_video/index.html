@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="generator" content="Hugo 0.38.2" />
+<meta name="generator" content="Hugo 0.39" />
 <title>Drop Shape analysis using pyDSA (video) :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
@@ -158,6 +158,11 @@ ims<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="pydsa_video_files/pydsa_video_1_0.png" alt="png" /></p>
 
+<h2 id="scaling">Scaling</h2>
+
+<p>As for an image, you can specify the scaling during the import (as it is done here), or by
+using the interactive function <code>ims.scale_interactive()</code>.</p>
+
 <h2 id="detecting-the-edges-and-contact-angles">Detecting the edges and contact angles</h2>
 
 <p>The method is similar than for a single image: we set the baseline, detect the edges, fit the edges, and compute the contact angles.</p>
@@ -180,7 +185,7 @@ fig, axs <span style="color:#666">=</span> plt<span style="color:#666">.</span>s
 plt<span style="color:#666">.</span>xlim(<span style="color:#40a070">0</span>, <span style="color:#40a070">6.5</span>)
 plt<span style="color:#666">.</span>ylim(<span style="color:#40a070">0</span>, <span style="color:#40a070">4.5</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_video_files/pydsa_video_3_0.png" alt="png" /></p>
+<p><img src="pydsa_video_files/pydsa_video_4_0.png" alt="png" /></p>
 
 <h2 id="plotting-the-drop-properties-evolution">Plotting the drop properties evolution</h2>
 
@@ -191,7 +196,7 @@ The following function will display:
 - the evolution of the contact angles (blue and yellow in the second figure)</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">edges<span style="color:#666">.</span>display_summary(figsize<span style="color:#666">=</span>(<span style="color:#40a070">10</span>, <span style="color:#40a070">8</span>))
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_video_files/pydsa_video_5_0.png" alt="png" /></p>
+<p><img src="pydsa_video_files/pydsa_video_6_0.png" alt="png" /></p>
 
 <h2 id="accessing-the-drop-properties">Accessing the drop properties</h2>
 

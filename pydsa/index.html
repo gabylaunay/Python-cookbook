@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="generator" content="Hugo 0.38.2" />
+<meta name="generator" content="Hugo 0.39" />
 <title>Drop Shape analysis using pyDSA (image) :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
@@ -161,6 +161,14 @@ im<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="pydsa_files/pydsa_2_0.png" alt="png" /></p>
 
+<h2 id="scaling">Scaling</h2>
+
+<p>Here we scaled the image during the import (using the <code>dx</code> and <code>dy</code> parameters),
+but you can also scale the image afterwards, using the <code>im.scale_interactive()</code> interactive function.</p>
+
+<p>This function ask you to select two points on the image and to input the real distance (in mm for example) separating them.
+It then scale the image accordingly.</p>
+
 <h2 id="focusing-on-the-drop">Focusing on the drop</h2>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">im<span style="color:#666">.</span>crop(intervx<span style="color:#666">=</span>[<span style="color:#40a070">1.5</span>, <span style="color:#40a070">5</span>], intervy<span style="color:#666">=</span>[<span style="color:#40a070">1</span>, <span style="color:#40a070">3</span>], inplace<span style="color:#666">=</span>True)
 
@@ -168,7 +176,7 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 plt<span style="color:#666">.</span>figure()
 im<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_4_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_5_0.png" alt="png" /></p>
 
 <h2 id="setting-the-baseline">Setting the baseline</h2>
 
@@ -182,7 +190,7 @@ It will display the drop image and ask you to put baseline points by clicking on
 plt<span style="color:#666">.</span>figure()
 im<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_6_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_7_0.png" alt="png" /></p>
 
 <p>The baseline is automatically displayed as a green line on the drop image.</p>
 
@@ -195,7 +203,7 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 plt<span style="color:#666">.</span>figure()
 edge<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_9_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_10_0.png" alt="png" /></p>
 
 <p>If the edge detection is not good enough, the <code>edge_detection</code> function provides several optional arguments that can help you get the edges you want.
 Please refer to the inline documentation of this function if you want to know more about this.</p>
@@ -213,7 +221,7 @@ small values of <code>s</code> means a more accurate fitting, and bigger values 
 plt<span style="color:#666">.</span>figure()
 edge<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_12_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_13_0.png" alt="png" /></p>
 
 <p>The edge fitting is displayed in orange.</p>
 
@@ -227,7 +235,7 @@ This is done by detecting the point of inflexion of the edge line.</p>
 plt<span style="color:#666">.</span>figure()
 edge<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_15_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_16_0.png" alt="png" /></p>
 
 <p>The triple points are displayed in purple.</p>
 
@@ -257,7 +265,7 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 Triple point angles: [81.4670191340014, 96.86878969719106]
 </code></pre>
 
-<p><img src="pydsa_files/pydsa_18_1.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_19_1.png" alt="png" /></p>
 
 <h1 id="full-script">Full script</h1>
 
@@ -278,7 +286,7 @@ plt<span style="color:#666">.</span>figure(figsize<span style="color:#666">=</sp
 edge<span style="color:#666">.</span>display()
 im<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_20_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_21_0.png" alt="png" /></p>
 
 <h1 id="dealing-with-videos">Dealing with videos</h1>
 
