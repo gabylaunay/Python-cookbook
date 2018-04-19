@@ -208,6 +208,15 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <p>If the edge detection is not good enough, the <code>edge_detection</code> function provides several optional arguments that can help you get the edges you want.
 Please refer to the inline documentation of this function if you want to know more about this.</p>
 
+<p>Another method, that detects the edges from contour map is also available:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">edge_cont <span style="color:#666">=</span> im<span style="color:#666">.</span>edge_detection_contour(level<span style="color:#666">=.</span><span style="color:#40a070">25</span>)
+
+<span style="color:#60a0b0;font-style:italic"># Display the edge</span>
+plt<span style="color:#666">.</span>figure()
+edge_cont<span style="color:#666">.</span>display()
+plt<span style="color:#666">.</span>show()</code></pre></div>
+<p><img src="pydsa_files/pydsa_12_0.png" alt="png" /></p>
+
 <h2 id="fitting-the-edge">Fitting the edge</h2>
 
 <p>Computing the contact angles will necessitates the edges to be fitted by a curve of some kind.
@@ -221,7 +230,7 @@ small values of <code>s</code> means a more accurate fitting, and bigger values 
 plt<span style="color:#666">.</span>figure()
 edge<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_13_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_14_0.png" alt="png" /></p>
 
 <p>The edge fitting is displayed in orange.</p>
 
@@ -235,7 +244,7 @@ This is done by detecting the point of inflexion of the edge line.</p>
 plt<span style="color:#666">.</span>figure()
 edge<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_16_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_17_0.png" alt="png" /></p>
 
 <p>The triple points are displayed in purple.</p>
 
@@ -265,7 +274,7 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 Triple point angles: [81.4670191340014, 96.86878969719106]
 </code></pre>
 
-<p><img src="pydsa_files/pydsa_19_1.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_20_1.png" alt="png" /></p>
 
 <h1 id="full-script">Full script</h1>
 
@@ -286,7 +295,7 @@ plt<span style="color:#666">.</span>figure(figsize<span style="color:#666">=</sp
 edge<span style="color:#666">.</span>display()
 im<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_21_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_22_0.png" alt="png" /></p>
 
 <h1 id="dealing-with-videos">Dealing with videos</h1>
 

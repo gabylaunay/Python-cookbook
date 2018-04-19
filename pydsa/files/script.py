@@ -37,6 +37,14 @@ edge.display()
 plt.show()
 
 
+edge_cont = im.edge_detection_contour(level=.25)
+
+# Display the edge
+plt.figure()
+edge_cont.display()
+plt.show()
+
+
 edge.fit(s=0.0005)
 
 # Display the edge
