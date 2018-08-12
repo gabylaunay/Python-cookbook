@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="generator" content="Hugo 0.39" />
+<meta name="generator" content="Hugo 0.46" />
 <title>Drop Shape analysis using pyDSA (video) :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
@@ -166,11 +166,19 @@ using the interactive function <code>ims.scale_interactive()</code>.</p>
 <h2 id="detecting-the-edges-and-contact-angles">Detecting the edges and contact angles</h2>
 
 <p>The method is similar than for a single image: we set the baseline, detect the edges, fit the edges, and compute the contact angles.</p>
+
+<p>As presented in the <a href="../pydsa/index.html">pyDSA image tutorial</a>, different type of fittings are available:
+- Spline
+- Circle
+- Ellipse
+- Multiple circles</p>
+
+<p>We will be using the spline fitting here:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ims<span style="color:#666">.</span>set_baseline([<span style="color:#40a070">0.0</span>, <span style="color:#40a070">0.583</span>],
                  [<span style="color:#40a070">6.492</span>, <span style="color:#40a070">0.57</span>])
 edges <span style="color:#666">=</span> ims<span style="color:#666">.</span>edge_detection()
-edges<span style="color:#666">.</span>fit(s<span style="color:#666">=</span><span style="color:#40a070">0.01</span>)
-edges<span style="color:#666">.</span>compute_contact_angle()
+fits <span style="color:#666">=</span> edges<span style="color:#666">.</span>fit_spline(s<span style="color:#666">=</span><span style="color:#40a070">0.01</span>)
+fits<span style="color:#666">.</span>compute_contact_angle()
 
 <span style="color:#60a0b0;font-style:italic"># Display</span>
 fig, axs <span style="color:#666">=</span> plt<span style="color:#666">.</span>subplots(<span style="color:#40a070">2</span>, <span style="color:#40a070">3</span>, figsize<span style="color:#666">=</span>(<span style="color:#40a070">15</span>, <span style="color:#40a070">6.9</span>), sharex<span style="color:#666">=</span>True, sharey<span style="color:#666">=</span>True)
@@ -178,7 +186,7 @@ fig, axs <span style="color:#666">=</span> plt<span style="color:#666">.</span>s
     plt<span style="color:#666">.</span>sca(ax)
     ind <span style="color:#666">=</span> <span style="color:#007020">int</span>(i<span style="color:#666">/</span><span style="color:#40a070">5</span><span style="color:#666">*</span>(<span style="color:#007020">len</span>(ims) <span style="color:#666">-</span> <span style="color:#40a070">1</span>))
     ims[ind]<span style="color:#666">.</span>_display()
-    edges[ind]<span style="color:#666">.</span>display()
+    fits[ind]<span style="color:#666">.</span>display()
     plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0">&#39;&#39;</span>)
     plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0">&#39;&#39;</span>)
     plt<span style="color:#666">.</span>title(<span style="color:#4070a0">&#39;t={:.2f}s&#39;</span><span style="color:#666">.</span>format(ims<span style="color:#666">.</span>times[ind]))
@@ -194,7 +202,7 @@ The following function will display:
 - the evolution of the drop edge contact with the surface (blue and yellow in the first figure)
 - the evolution of the drop base length (green in the first figure)
 - the evolution of the contact angles (blue and yellow in the second figure)</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">edges<span style="color:#666">.</span>display_summary(figsize<span style="color:#666">=</span>(<span style="color:#40a070">10</span>, <span style="color:#40a070">8</span>))
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fits<span style="color:#666">.</span>display_summary(figsize<span style="color:#666">=</span>(<span style="color:#40a070">10</span>, <span style="color:#40a070">8</span>))
 plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="pydsa_video_files/pydsa_video_6_0.png" alt="png" /></p>
 
@@ -208,73 +216,42 @@ if we want to do further processing on them.</p>
  
 role="alert">Angles are defined in the trigonometric sens, from the horizontal line.</div>
 
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">thetas, thetas_t <span style="color:#666">=</span> edges<span style="color:#666">.</span>get_contact_angles()
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">thetas <span style="color:#666">=</span> fits<span style="color:#666">.</span>get_contact_angles()
 <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;=== Left contact angle: ===&#34;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(thetas[:, <span style="color:#40a070">0</span>])
 <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">=== Right contact angle: ===&#34;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(thetas[:, <span style="color:#40a070">1</span>])
 
-radius <span style="color:#666">=</span> edges<span style="color:#666">.</span>get_drop_base()
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">=== Drop contact positions: ===&#34;</span>)
+radius <span style="color:#666">=</span> fits<span style="color:#666">.</span>get_base_diameter()
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">=== Drop base diameter: ===&#34;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(radius)</code></pre></div>
 <pre><code>=== Left contact angle: ===
-[106.82124177 106.89153104 106.80195249 107.28297574 107.34363505
- 107.27784188 106.95177242 107.53012718 107.16280456 107.25262441
- 106.38800189 107.13128785 106.37357963 105.5870764  107.08325183
- 106.39480128 106.66051429 106.58224643 106.58062816 107.08964047
- 106.82985203 106.83611945 107.08110645 106.82104733 106.98000331
- 107.32906465 106.79129417 106.34451226 105.77145275 106.69374328
- 104.02426232 105.5866148  104.74019582 103.04931016 102.88969475
- 102.69842583 103.88329765 103.66657388]
+[108.45133251 108.56905333 108.94098414 108.6637685  108.78968229
+ 108.64729511 108.45042889 109.05726449 108.56891952 108.68291827
+ 107.71614238 108.8673281  108.52842827 107.57748007 106.85612559
+ 106.64619826 106.7598668  106.48821283 106.44766937 107.2928261
+ 106.93754907 107.0023547  107.26599542 106.94606549 107.15156984
+ 107.38603405 106.84095892 106.38816455 105.89933937 106.43425898
+ 105.32280892 107.26613371 107.15417786 104.78656759 105.39636683
+ 104.82098104 105.93024436 105.65709515]
 
 === Right contact angle: ===
-[70.49951834 70.1299055  70.71083382 69.92671529 70.36612862 70.14270695
- 69.46986584 69.85713422 69.7853119  69.89271411 70.77508121 71.62557837
- 72.39170002 72.11318111 72.83302367 71.75478947 72.11059154 73.66624147
- 72.29808509 71.87726432 72.05937138 72.42824549 71.98435316 72.24383613
- 72.13157375 72.0712229  72.14669981 72.33741789 72.5867288  72.44292541
- 74.31487733 74.20368009 77.78053316 73.58388048 72.41755972 72.34645656
- 71.23826656 72.56089046]
+[71.18519713 71.41361539 72.23069913 70.96384133 71.44834136 71.2539393
+ 70.9257835  71.24947839 70.41384888 71.14552044 70.38516186 70.36636714
+ 70.83824699 71.16268663 72.76688233 71.8499163  72.16335096 73.04331667
+ 74.1749071  73.16412427 73.59414798 73.96603928 73.3791147  73.5018931
+ 73.07770852 73.70699554 73.74711474 73.96098094 74.21544043 73.14658736
+ 73.95969063 72.83238649 75.64029916 73.86062653 73.5998559  72.53706922
+ 71.8510239  73.30888509]
 
-=== Drop contact positions: ===
-[[1.93832964 4.90852869]
- [1.9383381  4.90723033]
- [1.93861383 4.90483267]
- [1.93671908 4.90809455]
- [1.93600406 4.90858664]
- [1.93615952 4.9070416 ]
- [1.93634843 4.90952053]
- [1.93689621 4.90750024]
- [1.93664427 4.90404155]
- [1.93673364 4.90270441]
- [1.82986022 4.97697942]
- [1.66242062 5.1632435 ]
- [1.50391141 5.3317036 ]
- [1.37008729 5.45485383]
- [1.31325928 5.60250705]
- [1.12961601 5.61792064]
- [1.07022579 5.72288739]
- [1.08781048 5.84436594]
- [1.07971978 5.83596298]
- [1.07061923 5.83787147]
- [1.07040238 5.83480219]
- [1.07000855 5.83446575]
- [1.07021225 5.83108282]
- [1.07119756 5.83159342]
- [1.07091224 5.82816593]
- [1.07048666 5.82537719]
- [1.07006687 5.82606727]
- [1.07056253 5.82534949]
- [1.07072783 5.82771558]
- [1.14615126 5.76372021]
- [1.22834386 5.63496423]
- [1.3624827  5.50338496]
- [1.48844526 5.38162034]
- [1.59604399 5.25495474]
- [1.75512248 5.10651467]
- [1.83889684 5.0346689 ]
- [1.83687488 5.03739273]
- [1.83756333 5.03659173]]
+=== Drop base diameter: ===
+[2.77104284 2.77012952 2.76956602 2.76557434 2.76451071 2.76340012
+ 2.76127857 2.7591692  2.75690282 2.7568683  2.95216762 3.30423511
+ 3.63916995 3.89738855 4.1019283  4.29905966 4.46534906 4.57915794
+ 4.58332076 4.57803255 4.57889252 4.57729446 4.57633242 4.574954
+ 4.57339214 4.57360764 4.57321084 4.57282042 4.57335625 4.4466908
+ 4.23645586 3.96997121 3.73638414 3.48897264 3.19838795 3.03890947
+ 3.02750821 3.02682091]
 </code></pre>
 
 
