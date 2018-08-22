@@ -151,7 +151,7 @@
 <h2 id="importing-an-image">Importing an image</h2>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pyDSA</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">dsa</span>
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">matplotlib.pyplot</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">plt</span>
-plt<span style="color:#666">.</span>rcParams[<span style="color:#4070a0">&#39;figure.figsize&#39;</span>] <span style="color:#666">=</span> <span style="color:#40a070">10</span>, <span style="color:#40a070">6</span>
+plt<span style="color:#666">.</span>rcParams[<span style="color:#4070a0">&#39;figure.figsize&#39;</span>] <span style="color:#666">=</span> <span style="color:#40a070">15</span>, <span style="color:#40a070">9</span>
 
 <span style="color:#60a0b0;font-style:italic"># Import an image</span>
 im <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_from_image(<span style="color:#4070a0">&#39;data/image.bmp&#39;</span>, dx<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, dy<span style="color:#666">=</span><span style="color:#40a070">1</span><span style="color:#666">/</span><span style="color:#40a070">120</span>, unit_x<span style="color:#666">=</span><span style="color:#4070a0">&#39;mm&#39;</span>, unit_y<span style="color:#666">=</span><span style="color:#4070a0">&#39;mm&#39;</span>)
@@ -160,7 +160,8 @@ im <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_
 plt<span style="color:#666">.</span>figure()
 im<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_2_0.png" alt="png" /></p>
+<pre><code>&lt;Figure size 1500x900 with 2 Axes&gt;
+</code></pre>
 
 <h2 id="scaling">Scaling</h2>
 
@@ -227,30 +228,19 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <h2 id="fitting-the-edge">Fitting the edge</h2>
 
 <p>Computing the contact angles will necessitates the edges to be fitted by a curve of some kind.
-pyDSA provide several ways of doing that, depending if you are studying a drop on a dry surface:
-- Spline fitting
-- Circle fitting
-- Ellipse fitting</p>
+pyDSA provide several ways of doing that, depending if you are studying a drop on a dry surface:</p>
+
+<ul>
+<li>Circle fitting</li>
+<li>Ellipse fitting</li>
+<li>Polynomial fitting</li>
+<li>Spline fitting</li>
+</ul>
 
 <p>or a drop on a lubricated surface:
+- Polynomial fitting
 - Spline fitting
 - Circles fitting</p>
-
-<h3 id="spline-fitting">Spline fitting</h3>
-
-<p>The drop edges are fitted with two splines. This solution is relatively generic and should work for any kind of drops.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sfit <span style="color:#666">=</span> edge<span style="color:#666">.</span>fit_spline()
-
-<span style="color:#60a0b0;font-style:italic"># Display the edge</span>
-plt<span style="color:#666">.</span>figure()
-im<span style="color:#666">.</span>display()
-sfit<span style="color:#666">.</span>display()
-plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_14_0.png" alt="png" /></p>
-
-<p>The edge fitting is displayed in orange.</p>
-
-<p>Spline fittings allow to detect the position of the triple point if present, using the <code>sfit.detect_triple_points()</code>.</p>
 
 <h3 id="circle-fitting">Circle fitting</h3>
 
@@ -262,7 +252,7 @@ plt<span style="color:#666">.</span>figure()
 im<span style="color:#666">.</span>display()
 cfit<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_16_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_14_0.png" alt="png" /></p>
 
 <h3 id="ellipse-fitting">Ellipse fitting</h3>
 
@@ -274,7 +264,37 @@ plt<span style="color:#666">.</span>figure()
 im<span style="color:#666">.</span>display()
 elfit<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
+<p><img src="pydsa_files/pydsa_16_0.png" alt="png" /></p>
+
+<h3 id="polynomial-fitting">Polynomial fitting</h3>
+
+<p>Fit the drop edges with a polynomial of the wanted degree (default is 3).
+Low degrees are particularly fitted for drops on dry surfaces, but that cannot be properly fitted with a circle or an ellipse.
+High degrees can be used for drops on SLIPS surfaces.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pfit <span style="color:#666">=</span> edge<span style="color:#666">.</span>fit_polyline(deg<span style="color:#666">=</span><span style="color:#40a070">5</span>)
+
+<span style="color:#60a0b0;font-style:italic"># Display the edge</span>
+plt<span style="color:#666">.</span>figure()
+im<span style="color:#666">.</span>display()
+pfit<span style="color:#666">.</span>display()
+plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="pydsa_files/pydsa_18_0.png" alt="png" /></p>
+
+<h3 id="spline-fitting">Spline fitting</h3>
+
+<p>The drop edges are fitted with two splines. This solution is relatively generic and should work for any kind of drops.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sfit <span style="color:#666">=</span> edge<span style="color:#666">.</span>fit_spline()
+
+<span style="color:#60a0b0;font-style:italic"># Display the edge</span>
+plt<span style="color:#666">.</span>figure()
+im<span style="color:#666">.</span>display()
+sfit<span style="color:#666">.</span>display()
+plt<span style="color:#666">.</span>show()</code></pre></div>
+<p><img src="pydsa_files/pydsa_20_0.png" alt="png" /></p>
+
+<p>The edge fitting is displayed in orange.</p>
+
+<p>Spline fittings allow to detect the position of the triple point if present, using the <code>sfit.detect_triple_points()</code>.</p>
 
 <h3 id="multiple-circles-fitting">Multiple circles fitting</h3>
 
@@ -288,7 +308,7 @@ plt<span style="color:#666">.</span>figure()
 im<span style="color:#666">.</span>display()
 csfit<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="pydsa_files/pydsa_20_0.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_23_0.png" alt="png" /></p>
 
 <h2 id="computing-the-contact-angles">Computing the contact angles</h2>
 
@@ -310,10 +330,10 @@ elfit<span style="color:#666">.</span>display()
 plt<span style="color:#666">.</span>ylim(<span style="color:#40a070">1.5</span>, <span style="color:#40a070">2</span>)
 plt<span style="color:#666">.</span>xlim(<span style="color:#40a070">1.8</span>, <span style="color:#40a070">2.4</span>)
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<pre><code>Contact angles: [86.69466024 93.02280966]
+<pre><code>Contact angles: [86.86785919 93.08907596]
 </code></pre>
 
-<p><img src="pydsa_files/pydsa_22_1.png" alt="png" /></p>
+<p><img src="pydsa_files/pydsa_25_1.png" alt="png" /></p>
 
 <h1 id="dealing-with-videos">Dealing with videos</h1>
 

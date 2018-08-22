@@ -3,7 +3,7 @@
 
 import pyDSA as dsa
 import matplotlib.pyplot as plt
-plt.rcParams['figure.figsize'] = 10, 6
+plt.rcParams['figure.figsize'] = 15, 9
 
 # Import an image
 im = dsa.import_from_image('data/image.bmp', dx=1/120, dy=1/120, unit_x='mm', unit_y='mm')
@@ -48,15 +48,6 @@ edge_cont.display()
 plt.show()
 
 
-sfit = edge.fit_spline()
-
-# Display the edge
-plt.figure()
-im.display()
-sfit.display()
-plt.show()
-
-
 cfit = edge.fit_circle()
 
 # Display the edge
@@ -72,6 +63,24 @@ elfit = edge.fit_ellipse()
 plt.figure()
 im.display()
 elfit.display()
+plt.show()
+
+
+pfit = edge.fit_polyline(deg=5)
+
+# Display the edge
+plt.figure()
+im.display()
+pfit.display()
+plt.show()
+
+
+sfit = edge.fit_spline()
+
+# Display the edge
+plt.figure()
+im.display()
+sfit.display()
 plt.show()
 
 
