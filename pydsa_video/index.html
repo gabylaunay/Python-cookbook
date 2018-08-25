@@ -147,6 +147,7 @@ The video used is a side-view of a drop during an inflation-deflation sequence.<
 <p>Importing works in the same way than for an image.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pyDSA</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">dsa</span>   
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">matplotlib.pyplot</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">plt</span>
+plt<span style="color:#666">.</span>rcParams[<span style="color:#4070a0">&#39;figure.figsize&#39;</span>] <span style="color:#666">=</span> <span style="color:#40a070">15</span>, <span style="color:#40a070">9</span>
 
 <span style="color:#60a0b0;font-style:italic"># Import an image</span>
 ims <span style="color:#666">=</span> dsa<span style="color:#666">.</span>import_from_video(<span style="color:#4070a0">&#39;data/video.mp4&#39;</span>,
@@ -169,6 +170,7 @@ using the interactive function <code>ims.scale_interactive()</code>.</p>
 
 <p>As presented in the <a href="../pydsa/index.html">pyDSA image tutorial</a>, different type of fittings are available:
 - Spline
+- Polynomial
 - Circle
 - Ellipse
 - Multiple circles</p>
@@ -177,7 +179,7 @@ using the interactive function <code>ims.scale_interactive()</code>.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ims<span style="color:#666">.</span>set_baseline([<span style="color:#40a070">0.0</span>, <span style="color:#40a070">0.583</span>],
                  [<span style="color:#40a070">6.492</span>, <span style="color:#40a070">0.57</span>])
 edges <span style="color:#666">=</span> ims<span style="color:#666">.</span>edge_detection()
-fits <span style="color:#666">=</span> edges<span style="color:#666">.</span>fit_spline(s<span style="color:#666">=</span><span style="color:#40a070">0.01</span>)
+fits <span style="color:#666">=</span> edges<span style="color:#666">.</span>fit_spline()
 fits<span style="color:#666">.</span>compute_contact_angle()
 
 <span style="color:#60a0b0;font-style:italic"># Display</span>
@@ -226,32 +228,32 @@ radius <span style="color:#666">=</span> fits<span style="color:#666">.</span>ge
 <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">=== Drop base diameter: ===&#34;</span>)
 <span style="color:#007020;font-weight:bold">print</span>(radius)</code></pre></div>
 <pre><code>=== Left contact angle: ===
-[108.45133251 108.56905333 108.94098414 108.6637685  108.78968229
- 108.64729511 108.45042889 109.05726449 108.56891952 108.68291827
- 107.71614238 108.8673281  108.52842827 107.57748007 106.85612559
- 106.64619826 106.7598668  106.48821283 106.44766937 107.2928261
- 106.93754907 107.0023547  107.26599542 106.94606549 107.15156984
- 107.38603405 106.84095892 106.38816455 105.89933937 106.43425898
- 105.32280892 107.26613371 107.15417786 104.78656759 105.39636683
- 104.82098104 105.93024436 105.65709515]
+[107.12413524 107.2256323  106.8389965  107.61289737 107.51142226
+ 107.57276364 105.62953427 105.23144587 107.55277592 107.66401919
+ 108.77097434 108.52915265 108.19716091 108.86385993 108.45840366
+ 108.11872607 107.43318801 107.37802132 106.76612957 107.92113095
+ 107.57457138 107.64618411 107.7956656  107.61428678 107.77428584
+ 107.89692038 107.43138843 107.37972004 106.70456297 107.6173274
+ 106.97438733 108.39064801 108.09762817 105.66737104 104.35097272
+ 105.53252132 106.82710145 106.41737082]
 
 === Right contact angle: ===
-[71.18519713 71.41361539 72.23069913 70.96384133 71.44834136 71.2539393
- 70.9257835  71.24947839 70.41384888 71.14552044 70.38516186 70.36636714
- 70.83824699 71.16268663 72.76688233 71.8499163  72.16335096 73.04331667
- 74.1749071  73.16412427 73.59414798 73.96603928 73.3791147  73.5018931
- 73.07770852 73.70699554 73.74711474 73.96098094 74.21544043 73.14658736
- 73.95969063 72.83238649 75.64029916 73.86062653 73.5998559  72.53706922
- 71.8510239  73.30888509]
+[71.15835736 70.62338871 72.12690458 71.10917987 71.46088435 71.19212707
+ 71.00712376 71.19449554 70.45508103 72.29992073 71.45324263 70.65348578
+ 71.07857174 69.86998847 71.54808159 71.27592401 71.19708308 71.25220752
+ 72.14233178 71.25019314 71.4840981  71.70291529 71.63233732 71.36244349
+ 71.13926384 72.04490637 71.6763298  71.69389988 71.84434718 72.03632988
+ 72.27500458 70.6757763  72.51274596 72.29308195 74.57313961 75.53117754
+ 72.90092722 72.94096946]
 
 === Drop base diameter: ===
-[2.77104284 2.77012952 2.76956602 2.76557434 2.76451071 2.76340012
- 2.76127857 2.7591692  2.75690282 2.7568683  2.95216762 3.30423511
- 3.63916995 3.89738855 4.1019283  4.29905966 4.46534906 4.57915794
- 4.58332076 4.57803255 4.57889252 4.57729446 4.57633242 4.574954
- 4.57339214 4.57360764 4.57321084 4.57282042 4.57335625 4.4466908
- 4.23645586 3.96997121 3.73638414 3.48897264 3.19838795 3.03890947
- 3.02750821 3.02682091]
+[2.77271942 2.77111709 2.77227161 2.76712496 2.76621241 2.76469889
+ 2.76344687 2.76218082 2.75825678 2.75989665 2.95207377 3.30542341
+ 3.64034989 3.89385347 4.0979318  4.29631274 4.46354555 4.57597189
+ 4.58054252 4.57492919 4.57553313 4.57364276 4.57366044 4.57150138
+ 4.57028073 4.57106973 4.56997315 4.568663   4.56926576 4.4437705
+ 4.23165626 3.96518912 3.73062331 3.48558824 3.20130726 3.04153762
+ 3.02750285 3.02485214]
 </code></pre>
 
 

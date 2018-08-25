@@ -3,6 +3,7 @@
 
 import pyDSA as dsa   
 import matplotlib.pyplot as plt
+plt.rcParams['figure.figsize'] = 15, 9
 
 # Import an image
 ims = dsa.import_from_video('data/video.mp4',
@@ -17,7 +18,7 @@ plt.show()
 ims.set_baseline([0.0, 0.583],
                  [6.492, 0.57])
 edges = ims.edge_detection()
-fits = edges.fit_spline(s=0.01)
+fits = edges.fit_spline()
 fits.compute_contact_angle()
 
 # Display
