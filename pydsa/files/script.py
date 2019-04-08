@@ -1,7 +1,7 @@
 #!/bin/env python3
 # coding: utf-8
 
-import pyDSA as dsa
+import pyDSA_core as dsa
 import matplotlib.pyplot as plt
 plt.rcParams['figure.figsize'] = 15, 9
 
@@ -109,4 +109,7 @@ elfit.display()
 plt.ylim(1.5, 2)
 plt.xlim(1.8, 2.4)
 plt.show()
+
+
+
 

@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="generator" content="Hugo 0.46" />
+<meta name="revised" content="2019-04-08T12:01:06 BST">
 <title>Drop Shape analysis using pyDSA (image) :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
@@ -20,6 +20,7 @@
 <meta name="description" content="Tutorial for drop shape analysis using pyDSA on a single image.">
 
 
+
     
   </head>
   <body data-url="/Python-cookbook/pydsa/">
@@ -31,6 +32,7 @@
   
     <a class="baselink" href="https://gabylaunay.github.io/Python-cookbook/">Python Cookbook for Scientific Data Analysis</a>
   
+
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
@@ -132,24 +134,14 @@
 <p>And an archive containing the script and the data here: <a href="files/archive.tar.gz">archive.tar.gz</a>, <a href="files/archive.zip">archive.zip</a>.</p>
 </div>
 
-<a href="https://github.com/gabylaunay/pyDSA">pyDSA</a> is a python3 package for Drop Shape Analysis.</p>
+<a href="https://framagit.org/gabylaunay/pyDSA_core">pyDSA</a> is a python3 package for Drop Shape Analysis.</p>
 
 <h2 id="installing-pydsa">Installing pyDSA</h2>
-
-<h3 id="dependencies">Dependencies</h3>
-
-<p>You will first need to install <a href="https://framagit.org/gabylaunay/IMTreatment">IMTreatment</a> by downloading the package <a href="https://framagit.org/gabylaunay/IMTreatment/repository/master/archive.zip">here</a>, extracting it and installing it with:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python3 setup.py install</code></pre></div>
-<p>pyDSA also use <a href="https://opencv.org">OpenCV</a> for edge detection, so you will need it installed as well.</p>
-
-<h3 id="install-pydsa">Install pyDSA</h3>
-
-<p>Download the sources <a href="https://github.com/gabylaunay/pyDSA/archive/master.zip">here</a>, extract, and install them:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python3 setup.py install</code></pre></div>
-<p>pyDSA have some dependencies (matplotlib, scipy, numpy, &hellip;) that should be installed automatically.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install pyDSA_core</code></pre></div>
+<p>pyDSA have some dependencies (matplotlib, scipy, numpy, &hellip;) that will be installed automatically.</p>
 
 <h2 id="importing-an-image">Importing an image</h2>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pyDSA</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">dsa</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pyDSA_core</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">dsa</span>
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">matplotlib.pyplot</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">plt</span>
 plt<span style="color:#666">.</span>rcParams[<span style="color:#4070a0">&#39;figure.figsize&#39;</span>] <span style="color:#666">=</span> <span style="color:#40a070">15</span>, <span style="color:#40a070">9</span>
 
@@ -232,6 +224,7 @@ pyDSA provide several ways of doing that, depending if you are studying a drop o
 <ul>
 <li>Circle fitting</li>
 <li>Ellipse fitting</li>
+<li>Ellipses fitting (one ellispe per edge)</li>
 <li>Polynomial fitting</li>
 <li>Spline fitting</li>
 </ul>
@@ -342,7 +335,7 @@ This is the subject of the tutorial available <a href="../pydsa_video/index.html
 <h1 id="how-does-it-works">How does it works ?</h1>
 
 <p>If you want to know more about how pyDSA works, you can take a look at the <a href="../image-analysis/index.html">drop shape analysis tutorial</a>, or go through the code (on your machine, or <a href="https://github.com/gabylaunay/pyDSA">here</a>).</p>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"></code></pre></div>
 
 
     
@@ -363,12 +356,9 @@ This is the subject of the tutorial available <a href="../pydsa_video/index.html
 
     
 
-  
+    
 
-    <div class="github-link">
-      <a href="pydsa/_index.md" target="blank"><i class="fa fa-code-fork"></i>
-        Improve this page</a>
-    </div>
+    
   </div>
 
 
@@ -392,6 +382,7 @@ This is the subject of the tutorial available <a href="../pydsa_video/index.html
 
 
 <script src="/Python-cookbook/theme-flex/script.js"></script>
+
 
     
 

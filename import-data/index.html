@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="generator" content="Hugo 0.46" />
+<meta name="revised" content="2019-04-08T12:01:06 BST">
 <title>Importing Data :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
@@ -20,6 +20,7 @@
 <meta name="description" content="Cookbook on importing data into Python">
 
 
+
     
   </head>
   <body data-url="/Python-cookbook/import-data/">
@@ -31,6 +32,7 @@
   
     <a class="baselink" href="https://gabylaunay.github.io/Python-cookbook/">Python Cookbook for Scientific Data Analysis</a>
   
+
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
@@ -198,22 +200,14 @@ enable clear programming on both small and large scales.[27]
 <h1 id="images">Images</h1>
 
 <p>The <a href="https://www.scipy.org">scipy</a> package makes it particularly easy to import on work with images.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">scipy</span> <span style="color:#007020;font-weight:bold">import</span> misc
-image <span style="color:#666">=</span> misc<span style="color:#666">.</span>imread(<span style="color:#4070a0">&#39;data/image.bmp&#39;</span>)</code></pre></div>
-<pre><code>/usr/lib/python3.6/site-packages/ipykernel_launcher.py:2: DeprecationWarning: `imread` is deprecated!
-`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
-Use ``imageio.imread`` instead.
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">imageio</span> <span style="color:#007020;font-weight:bold">import</span> imread
+image <span style="color:#666">=</span> imread(<span style="color:#4070a0">&#39;data/image.bmp&#39;</span>)</code></pre></div>
 <p>Images can then be displayed it with matplotlib.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">matplotlib.pyplot</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">plt</span>
 plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>imshow(image)
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<pre><code>&lt;matplotlib.figure.Figure at 0x7fbf6c3abba8&gt;
-</code></pre>
-
-<p><img src="import-data_files/import-data_11_1.png" alt="png" /></p>
+<p><img src="import-data_files/import-data_11_0.png" alt="png" /></p>
 
 <p>Images are stored as arrays of numbers, so pixel values are easily accessible.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;Pixel values:</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">{}&#34;</span><span style="color:#666">.</span>format(image))
@@ -244,7 +238,7 @@ Value of the pixel at (10,10): 189
 <h1 id="compressed-files">Compressed files</h1>
 
 <p>Coming soon&hellip;</p>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"></code></pre></div>
 
 
     
@@ -265,12 +259,9 @@ Value of the pixel at (10,10): 189
 
     
 
-  
+    
 
-    <div class="github-link">
-      <a href="import-data/_index.md" target="blank"><i class="fa fa-code-fork"></i>
-        Improve this page</a>
-    </div>
+    
   </div>
 
 
@@ -294,6 +285,7 @@ Value of the pixel at (10,10): 189
 
 
 <script src="/Python-cookbook/theme-flex/script.js"></script>
+
 
     
 

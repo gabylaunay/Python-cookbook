@@ -21,8 +21,8 @@ for line in data:
     print(line)
 
 
-from scipy import misc
-image = misc.imread('data/image.bmp')
+from imageio import imread
+image = imread('data/image.bmp')
 
 
 import matplotlib.pyplot as plt
@@ -33,4 +33,7 @@ plt.show()
 
 print("Pixel values:\n{}".format(image))
 print("Value of the pixel at (10,10): {}".format(image[10, 10]))
+
+
+
 

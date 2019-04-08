@@ -5,7 +5,7 @@
     
       <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="generator" content="Hugo 0.46" />
+<meta name="revised" content="2019-04-08T12:01:06 BST">
 <title>Drop Shape analysis using Python :: Python Cookbook for Scientific Data Analysis</title>
 <link rel="shortcut icon" href="/Python-cookbook/images/favicon.png" type="image/x-icon" />
 <link href="/Python-cookbook/css/font-awesome.min.css" rel="stylesheet">
@@ -20,6 +20,7 @@
 <meta name="description" content="Tutorial for drop shape detection and analysis.">
 
 
+
     
   </head>
   <body data-url="/Python-cookbook/image-analysis/">
@@ -31,6 +32,7 @@
   
     <a class="baselink" href="https://gabylaunay.github.io/Python-cookbook/">Python Cookbook for Scientific Data Analysis</a>
   
+
 
   </div>
   <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
@@ -169,24 +171,20 @@ For conda users on windows, you should be able to get this working with the foll
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">imageio</span>
 image <span style="color:#666">=</span> imageio<span style="color:#666">.</span>imread(<span style="color:#4070a0">&#39;data/image.bmp&#39;</span>)</code></pre></div>
 <div class="expand">
-  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-    <font color="grey">
-      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-      <span>
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+        <span>
         
         
         Explain me this block
         
-      </span>
-    </font>
-  </div>
-  <div class="expand-content" style="display: none;text-indent:0px">
-    <font color="grey">
-      <p>We first imports the Imageio module.<br />
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+<p>We first imports the Imageio module.<br />
 Then use its <code>imread()</code> function to read the image and store it in the <code>image</code> variable.</p>
 
-    </font>
-  </div>
+    </div>
 </div>
 
 <p>Images are stored as arrays of numbers.
@@ -196,29 +194,26 @@ plt<span style="color:#666">.</span>figure()
 plt<span style="color:#666">.</span>imshow(image)
 plt<span style="color:#666">.</span>colorbar()
 plt<span style="color:#666">.</span>show()</code></pre></div>
-<p><img src="image-analysis_files/image-analysis_6_0.png" alt="png" /></p>
+<pre><code>&lt;Figure size 640x480 with 2 Axes&gt;
+</code></pre>
 
 <div class="expand">
-  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-    <font color="grey">
-      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-      <span>
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+        <span>
         
         
         Explain me this block
         
-      </span>
-    </font>
-  </div>
-  <div class="expand-content" style="display: none;text-indent:0px">
-    <font color="grey">
-      <p>We first imports the <code>pyplot</code> submodule from matplotlib.
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+<p>We first imports the <code>pyplot</code> submodule from matplotlib.
 The <code>Pyplot</code> module is the main submodule for plotting data in a Matlab-way.<br />
 We then create a figure with <code>plt.figure()</code>, display the image in it with <code>plt.imshow()</code>, add a colorbar with <code>plt.colorbar()</code> and show the results with <code>plt.show()</code>.<br />
 Depending on your IDE, you may not need the last line, as the figures will automatically be shown.</p>
 
-    </font>
-  </div>
+    </div>
 </div>
 
 <h2 id="cropping">Cropping</h2>
@@ -237,26 +232,22 @@ plt<span style="color:#666">.</span>show()
 <p><img src="image-analysis_files/image-analysis_9_0.png" alt="png" /></p>
 
 <div class="expand">
-  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-    <font color="grey">
-      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-      <span>
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+        <span>
         
         
         Explain me this block
         
-      </span>
-    </font>
-  </div>
-  <div class="expand-content" style="display: none;text-indent:0px">
-    <font color="grey">
-      <p>The <code>image</code> variable is an array of numbers that can be cropped using indexes.
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+<p>The <code>image</code> variable is an array of numbers that can be cropped using indexes.
 It is here cropped from indexes 200 to 550 on the x axis and from indexes 200 to 400 on the y axis.
 Because of the way images are referenced by the Imageio and matplotlib packages, the y axis has to be specified first.<br />
 We then display the image.</p>
 
-    </font>
-  </div>
+    </div>
 </div>
 
 <h2 id="edge-detection">Edge detection</h2>
@@ -279,27 +270,23 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_12_0.png" alt="png" /></p>
 
 <div class="expand">
-  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-    <font color="grey">
-      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-      <span>
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+        <span>
         
         
         Explain me this block
         
-      </span>
-    </font>
-  </div>
-  <div class="expand-content" style="display: none;text-indent:0px">
-    <font color="grey">
-      <p>We import opencv with <code>import cv2</code>.<br />
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+<p>We import opencv with <code>import cv2</code>.<br />
 Minimal and maximal pixel values are obtained using the <code>min()</code> and <code>max()</code> methods and stored.<br />
 Those values are then used as arguments of the OpenCV edge detector: <code>Canny()</code>.<br />
 The result is an array of numbers, stored in the <code>edges</code> variable.<br />
 This array of numbers id finally displayed.</p>
 
-    </font>
-  </div>
+    </div>
 </div>
 
 <p>The <code>Canny()</code> function returns an array of numbers that is equal to 1 (in yellow here) where edges have been detected, and 0 (in blue here) elsewhere.</p>
@@ -323,25 +310,21 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_15_0.png" alt="png" /></p>
 
 <div class="expand">
-  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-    <font color="grey">
-      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-      <span>
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+        <span>
         
         
         Explain me this block
         
-      </span>
-    </font>
-  </div>
-  <div class="expand-content" style="display: none;text-indent:0px">
-    <font color="grey">
-      <p>This block is mainly similar to the previous one.<br />
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+<p>This block is mainly similar to the previous one.<br />
 The threshold values are just adjusted to get rid of the unwanted edges near the sample surface.
 The thresholds values are now 0.75 times the minimal pixel value and 1.5 times the maximal pixel value.</p>
 
-    </font>
-  </div>
+    </div>
 </div>
 
 <p>We got rid of some of the unwanted bits, but we still detect some weird shapes due to the reflection of the drop on the sample (around x=50, y=200 for example).
@@ -355,25 +338,21 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_18_0.png" alt="png" /></p>
 
 <div class="expand">
-  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-    <font color="grey">
-      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-      <span>
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+        <span>
         
         
         Explain me this block
         
-      </span>
-    </font>
-  </div>
-  <div class="expand-content" style="display: none;text-indent:0px">
-    <font color="grey">
-      <p><code>edges</code> is an array containing 1 where edges were detected and 0 elsewhere.
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+<p><code>edges</code> is an array containing 1 where edges were detected and 0 elsewhere.
 To remove edges for y&lt;180, we just need to fill the array with 0 for y&lt;180.<br />
 This is done by specifying that the values of <code>edges</code> from y=180 to infinity (<code>180:</code>) and for every x (<code>:</code>) are set to 0.</p>
 
-    </font>
-  </div>
+    </div>
 </div>
 
 <h2 id="from-image-to-points">From image to points</h2>
@@ -395,20 +374,17 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_21_0.png" alt="png" /></p>
 
 <div class="expand">
-  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-    <font color="grey">
-      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-      <span>
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+        <span>
         
         
         Explain me this block
         
-      </span>
-    </font>
-  </div>
-  <div class="expand-content" style="display: none;text-indent:0px">
-    <font color="grey">
-      <p>We import numpy with <code>import numpy as np</code>.<br />
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+<p>We import numpy with <code>import numpy as np</code>.<br />
 The <code>np.where()</code> function returns the positions of the array that are not equal to zero.
 Which are here the positions of our drop edge.<br />
 The two following lines allow to transform the position from integers to floating point values.
@@ -416,8 +392,7 @@ This will be needed for the next steps.<br />
 <code>plt.plot()</code> allows to plot the edge points position.<br />
 <code>plt.axis('equal')</code> ensures that the image is not deformed (stretched) along x or y.</p>
 
-    </font>
-  </div>
+    </div>
 </div>
 
 <p>For convenience, we want to center the drop on the referential.</p>
@@ -433,25 +408,21 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_24_0.png" alt="png" /></p>
 
 <div class="expand">
-  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-    <font color="grey">
-      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-      <span>
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+        <span>
         
         
         Explain me this block
         
-      </span>
-    </font>
-  </div>
-  <div class="expand-content" style="display: none;text-indent:0px">
-    <font color="grey">
-      <p><code>xs.mean()</code> allows to access the average position of the edges along x.<br />
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+<p><code>xs.mean()</code> allows to access the average position of the edges along x.<br />
 <code>ys.min()</code> allows to access the minimal position of the edges along y.<br />
 By substracting those values to x and y, we ensure that the origin of our referential is at the base of the drop.</p>
 
-    </font>
-  </div>
+    </div>
 </div>
 
 <h2 id="from-pixels-to-mm">From pixels to mm</h2>
@@ -533,27 +504,23 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_29_0.png" alt="png" /></p>
 
 <div class="expand">
-  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-    <font color="grey">
-      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-      <span>
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+        <span>
         
         
         Explain me this block
         
-      </span>
-    </font>
-  </div>
-  <div class="expand-content" style="display: none;text-indent:0px">
-    <font color="grey">
-      <p>We first sort the drop edges position along x and put them in the <code>new_xs</code> variable.<br />
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+<p>We first sort the drop edges position along x and put them in the <code>new_xs</code> variable.<br />
 Then, for each value of x, we average the associated values of y, to ensure that there is only one value of y for each x.<br />
 We then perform the fitting using the <code>UnivariateSpline</code> function from Scipy.<br />
 <code>k</code> and <code>s</code> parameters can be tuned to achieve smoother or more accurate fitting.<br />
 We then display the edge and its fitting.</p>
 
-    </font>
-  </div>
+    </div>
 </div>
 
 <h2 id="getting-the-drop-basic-properties">Getting the drop basic properties</h2>
@@ -611,33 +578,29 @@ plt<span style="color:#666">.</span>show()</code></pre></div>
 <p><img src="image-analysis_files/image-analysis_34_1.png" alt="png" /></p>
 
 <div class="expand">
-  <div class="expand-label" style="cursor: pointer;text-indent:15px" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
-    <font color="grey">
-      <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
-      <span>
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fa fa-chevron-down' : 'fa fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fa fa-chevron-right"></i>
+        <span>
         
         
         Explain me this block
         
-      </span>
-    </font>
-  </div>
-  <div class="expand-content" style="display: none;text-indent:0px">
-    <font color="grey">
-      <p>We first determine the positions of the drop edge contact with the baseline along x.<br />
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+<p>We first determine the positions of the drop edge contact with the baseline along x.<br />
 We then use the <code>derivative</code> function from Scipy to get the edge local slope at each contacts using our fitting.<br />
 <code>dx</code> is used by the derivation algorithm. you can use a smaller value to get a more accurate result.<br />
 The edge local gradients are then translated to angles.<br />
 We then print and display the contact angles.</p>
 
-    </font>
-  </div>
+    </div>
 </div>
 
 <h2 id="getting-the-triple-point">Getting the triple point</h2>
 
 <p>Coming soon&hellip;</p>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"></code></pre></div>
 
 
     
@@ -658,12 +621,9 @@ We then print and display the contact angles.</p>
 
     
 
-  
+    
 
-    <div class="github-link">
-      <a href="image-analysis/_index.md" target="blank"><i class="fa fa-code-fork"></i>
-        Improve this page</a>
-    </div>
+    
   </div>
 
 
@@ -687,6 +647,7 @@ We then print and display the contact angles.</p>
 
 
 <script src="/Python-cookbook/theme-flex/script.js"></script>
+
 
     
 

@@ -1,7 +1,7 @@
 #!/bin/env python3
 # coding: utf-8
 
-import pyDSA as dsa   
+import pyDSA_core as dsa   
 import matplotlib.pyplot as plt
 plt.rcParams['figure.figsize'] = 15, 9
 
@@ -36,6 +36,10 @@ plt.ylim(0, 4.5)
 plt.show()
 
 
+# monkey patching because of bug in display_summary()
+fits.get_base_diameter = fits.get_base_diameters
+
+
 fits.display_summary(figsize=(10, 8))
 plt.show()
 
@@ -49,4 +53,7 @@ print(thetas[:, 1])
 radius = fits.get_base_diameter()
 print("\n=== Drop base diameter: ===")
 print(radius)
+
+
+
 
