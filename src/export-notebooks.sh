@@ -29,7 +29,7 @@ for file in *.ipynb; do
         page_weight="0"
     fi
     # Exporting to markdown
-    jupyter nbconvert --to markdown "$file"
+    jupyter nbconvert --to markdown "$file" --TagRemovePreprocessor.remove_cell_tags='{"remove_cell"}'
     #     Addind header
     sed -i "1i+++" "${basename}.md"
     sed -i "2ititle = \"$page_name\"" "${basename}.md"
