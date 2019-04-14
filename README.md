@@ -3,3 +3,7 @@
 
 # Python-cookbook
 A Python cookbook for scientific data analysis
+
+This is accessible as a website [here](https://gabylaunay.github.io/Python-cookbook).
+
+For a more interactive experience, this is also available in binder [here](https://hub.mybinder.org/user/gabylaunay-python-cookbook-8rhsc222/lab)
