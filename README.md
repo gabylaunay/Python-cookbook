@@ -1,9 +1,14 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gabylaunay/Python-cookbook/master?filepath=src%2Fnotebooks?urlpath=lab)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gabylaunay/Python-cookbook/master?urlpath=lab/tree/src/notebooks/pydsa.ipynb)
 
 
 # Python-cookbook
-A Python cookbook for scientific data analysis
+A Python cookbook for scientific data analysis.
 
-This is accessible as a website [here](https://gabylaunay.github.io/Python-cookbook).
+## Webpage
 
-For a more interactive experience, this is also available in binder [here](https://hub.mybinder.org/user/gabylaunay-python-cookbook-8rhsc222/lab)
+Those ressources are accessible as a [website](https://gabylaunay.github.io/Python-cookbook).
+
+## Try it out
+
+For a more interactive experience, this is also available as a [jupyter notebook](https://mybinder.org/v2/gh/gabylaunay/Python-cookbook/master?urlpath=lab/tree/src/notebooks/pydsa.ipynb)
+
