@@ -4,11 +4,11 @@
 # Python-cookbook
 A Python cookbook for scientific data analysis.
 
-## Webpage
+This is a work in progress, mainly oriented towards image analysis at the moment.
 
-Those ressources are accessible as a [website](https://gabylaunay.github.io/Python-cookbook).
+## How to access it
 
-## Try it out
+Those ressources are accessible as a static [website](https://gabylaunay.github.io/Python-cookbook).
 
-For a more interactive experience, this is also available as a [jupyter notebook](https://mybinder.org/v2/gh/gabylaunay/Python-cookbook/master?urlpath=lab/tree/src/notebooks/pydsa.ipynb)
+If you want to play with the code, this is also available as an interactive [jupyter notebook](https://mybinder.org/v2/gh/gabylaunay/Python-cookbook/master?urlpath=lab/tree/src/notebooks/pydsa.ipynb).
 
